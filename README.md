@@ -13,6 +13,9 @@ I admit to finding in somewhat strange that the SDK didn't opt to use C for at
 least the external interface as it's pretty much the standard for offering 
 interoperability between programming langauges.
 
+A secondary option is the pybind11 library, which is meant for writting 
+bindings for CPP but does introduce a external dependency.
+
 ## Requirements
 
 ## Usage
