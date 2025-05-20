@@ -11,6 +11,9 @@ A Python SDK wrapper/interface for the seecube sdk
 - [ ] Create release & tag for current SDK version.
 - [ ] Add automatic OS detection.
 - [ ] Setup to load shared library(multiple platforms).
+- [ ] Add pytest files.
+- [ ] Add API documentation.
+- [ ] 
 
 
 
