@@ -1,9 +1,23 @@
 # seecube_sdk_python_wrapper
 A Python SDK wrapper/interface for the seecube sdk
 
+## Description
+
+The SDK in question uses a header file `*.h` with object oriented code and
+making use of C++ keywords in the header file.
+
+In order to make the library compatable for use with python's ctype module the
+C++ needs to be wrapped with an C interface.
+
+I admit to finding in somewhat strange that the SDK didn't opt to use C for at
+least the external interface as it's pretty much the standard for offering 
+interoperability between programming langauges.
+
 ## Requirements
 
 ## Usage
+
+
 
 ## RoadMap
 
@@ -13,7 +27,11 @@ A Python SDK wrapper/interface for the seecube sdk
 - [ ] Setup to load shared library(multiple platforms).
 - [ ] Add pytest files.
 - [ ] Add API documentation.
-- [ ] 
+- [ ] Create C interface for C++ header.
+- [ ] Setup project structure for C/C++ development.
+- [ ] Automate the building of C interface.
+
+
 
 
 
