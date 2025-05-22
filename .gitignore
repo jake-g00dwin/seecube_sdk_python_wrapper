@@ -172,3 +172,20 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# ++++++++++++++++++++++++++++++++++++++
+# CMAKE: C and C++ Stuff.
+# ++++++++++++++++++++++++++++++++++++++
+
+build/CMakeFiles
+build/Testing/Temporary
+build/cpputest
+build/src
+build/tests
+build/CMakeCache.txt
+build/CTestTestfile.cmake
+build/Makefile
+build/cmake_install.cmake
+build/compile_commands.json
+.cache/clangd/index
+build/.cache/clangd/index
