@@ -26,6 +26,21 @@ bindings for CPP but does introduce a external dependency.
 
 ## Usage
 
+During setup after copying or cloning the repo:
+
+```sh
+git submodule update --init
+
+# To build and test/check pybind11
+cd ./pybind11
+mkdir ./build && cd ./build
+cmake ..
+make check -j 4
+
+
+
+```
+
 
 
 ## RoadMap
