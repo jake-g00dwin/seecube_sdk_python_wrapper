@@ -67,7 +67,10 @@ endif()
 
 # Pybind11 submodule needs to be included.
 set(PYBIND11_PYTHON_VERSION 3.10)
-add_subdirectory(pybind11)
+
+
+# Include all external
+add_subdirectory(extern)
 
 include_directories(
     ./inc
