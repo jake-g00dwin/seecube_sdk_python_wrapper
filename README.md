@@ -55,7 +55,7 @@ make check -j 4
 - [X] Setup project structure for C/C++ development.
 - [ ] Automate the building of C interface.
 - [ ] Update doxygen configuration.
-- [ ] Add pybind11 as git sub-module.
+- [X] Add pybind11 as git sub-module.
 
 
 
