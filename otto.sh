@@ -177,7 +177,7 @@ cross_compile () {
 
 build_release() {
     clear_cmake_cache 
-    cmake -DCAM_HANDLER_LIB=ON -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ../ 
+    cmake -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ../ 
     make 
 }
 
@@ -185,7 +185,8 @@ build_main () {
     clear_cmake_cache
     
     cmake -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ../
-    make main
+    #make main 
+    make SeeCubeSDK_PyWrapper
 }
 
 run_c_tests () {
