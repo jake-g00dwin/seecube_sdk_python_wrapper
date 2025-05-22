@@ -10,10 +10,11 @@
 
 namespace py = pybind11;
 
+int add(int i, int j) {
+    return i + j;
+}
 
-
-int main(int argc, char **argv)
-{
-    printf("Hello!\n");
-    return 0;
+PYBIND11_MODULE(py_seecube, handle) {
+    handle.doc() = "This is the module docs.";
+    handle.def("add", &add);
 }
