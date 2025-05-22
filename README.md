@@ -18,6 +18,12 @@ bindings for CPP but does introduce a external dependency.
 
 ## Requirements
 
+- Python3.10
+- pybind11, for C++ to python bindings.
+- pytest, for unit testing.
+- Cmake, for building the 
+
+
 ## Usage
 
 
