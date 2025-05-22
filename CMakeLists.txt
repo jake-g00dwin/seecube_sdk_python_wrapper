@@ -8,3 +8,17 @@ project(SeeCubeSDK_PyWrapper
 )
 enable_testing()
 
+set(TARGET_GROUP production CACHE STRING "Group to build")
+
+if(MSVC OR MSYS OR MINGW)
+    message("### SETUP FOR WINDOWS ###")
+    add_definitions(-DWINDOWS)
+else()
+    message("### SETUP FOR UNIX ###")
+    add_definitions(-DUNIX)
+endif()
+
+# For being able to used LSP
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+
