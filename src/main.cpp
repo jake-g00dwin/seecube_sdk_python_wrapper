@@ -8,6 +8,9 @@
 //Include needed pybind stuff.
 #include <pybind11/pybind11.h>
 
+// The SeeCube SDK header(s)
+#include <SeeCube_SDK_user.h>
+
 namespace py = pybind11;
 
 int add(int i, int j) {
