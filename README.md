@@ -40,6 +40,7 @@ bindings for CPP but does introduce a external dependency.
 - [X] Setup project structure for C/C++ development.
 - [ ] Automate the building of C interface.
 - [ ] Update doxygen configuration.
+- [ ] Add pybind11 as git sub-module.
 
 
 
