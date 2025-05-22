@@ -65,8 +65,11 @@ endif()
 # PROJECT SPECIFIC 
 # #######################################
 
+# Pybind11 submodule needs to be included.
+set(PYBIND11_PYTHON_VERSION 3.10)
+add_subdirectory(pybind11)
+
 include_directories(
     ./inc
 )
-
 add_subdirectory(src)
