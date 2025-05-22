@@ -31,4 +31,33 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_FLAGS "-Wall -Werror -Wpedantic")
 
+# #######################################
+# TESTING STUFF 
+# #######################################
+
+if (UNIT_TESTING)
+
+    if(DEFINED ENV{CPPUTEST_HOME})
+        message(STATUS "Using CppUTest home: $ENV{CPPUTEST_HOME}")
+        set(CPPUTEST_INCLUDE_DIRS $ENV{CPPUTEST_HOME}/include)
+        set(CPPUTEST_LIBRARIES $ENV{CPPUTEST_HOME}/lib)
+        set(CPPUTEST_LDFLAGS CppUTest CppUTestExt)
+    else()
+        find_package(PkgConfig REQUIRED)
+        pkg_search_module(CPPUTEST REQUIRED cpputest>=3.8)
+        message(STATUS "Found CppUTest version ${CPPUTEST_VERSION}")
+    endif()
+    
+    include_directories(
+        ${CPPUTEST_INCLUDE_DIRS}
+        ./inc
+        ./mocks
+        )
+    link_directories(${CPPUTEST_LIBRARIES})
+    
+    add_subdirectory(mocks)
+    add_subdirectory(tests)
+
+endif()
+
 
