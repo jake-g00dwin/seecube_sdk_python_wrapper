@@ -37,9 +37,9 @@ bindings for CPP but does introduce a external dependency.
 - [ ] Add pytest files.
 - [ ] Add API documentation.
 - [ ] Create C interface for C++ header.
-- [ ] Setup project structure for C/C++ development.
+- [X] Setup project structure for C/C++ development.
 - [ ] Automate the building of C interface.
-
+- [ ] Update doxygen configuration.
 
 
 
