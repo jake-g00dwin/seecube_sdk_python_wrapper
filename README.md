@@ -29,7 +29,7 @@ bindings for CPP but does introduce a external dependency.
 During setup after copying or cloning the repo:
 
 ```sh
-git submodule update --init
+git submodule update --init --recursive
 
 # To build and test/check pybind11
 cd ./pybind11
