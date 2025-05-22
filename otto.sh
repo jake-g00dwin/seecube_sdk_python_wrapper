@@ -8,6 +8,7 @@ CMAKE_VERBOSE="ON"
 CROSS_COMPILE=1
 TEMPLATE_FILES=".template_files"
 MODULE_DIR="${TEMPLATE_FILES}/modules"
+PROJECT_NAME="SeeCubeSDK_PyWrapper"
 
 
 format_source_code () {
@@ -185,8 +186,7 @@ build_main () {
     clear_cmake_cache
     
     cmake -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ../
-    #make main 
-    make SeeCubeSDK_PyWrapper
+    make ${PROJECT_NAME}
 }
 
 run_c_tests () {
