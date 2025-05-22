@@ -61,3 +61,12 @@ if (UNIT_TESTING)
 endif()
 
 
+# #######################################
+# PROJECT SPECIFIC 
+# #######################################
+
+include_directories(
+    ./inc
+)
+
+add_subdirectory(src)
