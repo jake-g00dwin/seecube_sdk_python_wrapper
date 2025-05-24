@@ -65,5 +65,38 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def("getSensorSettings", &SeeCube::getSensorSettings)
         .def("getDeviceFrameRate", &SeeCube::getDeviceFrameRate)
         .def("setDeviceFrameRate", &SeeCube::setDeviceFrameRate)
-        .def("getImageSize", &SeeCube::getImageSize);
+        .def("getImageSize", &SeeCube::getImageSize)
+        .def("getRawFrame", &SeeCube::getRawFrame)
+        .def("getColorFrame", &SeeCube::getColorFrame)
+        .def("getProcessingFrameRate", &SeeCube::getProcessingFrameRate)
+        .def("setProcessingFrameRate", &SeeCube::setProcessingFrameRate)
+        .def("setFreeRun", &SeeCube::setFreeRun)
+        .def("getFreeRun", &SeeCube::getFreeRun)
+        .def("runFFC", &SeeCube::runFFC)
+        .def("setFFC", &SeeCube::setFFC)
+        .def("getFFC", &SeeCube::getFFC)
+        .def("closeShutter", &SeeCube::closeShutter)
+        .def("openShutter", &SeeCube::openShutter)
+        .def("setColorPreset", &SeeCube::setColorPreset)
+        .def("getColorPreset", &SeeCube::getColorPreset)
+        .def("setDefectivePixelsCorrection",
+                py::overload_cast<const bool&>(&SeeCube::setDefectivePixelsCorrection),
+                py::arg("pStatus"))
+        .def("setDefectivePixelsCorrection",
+                py::overload_cast<>(&SeeCube::setDefectivePixelsCorrection))
+        //.def("getDefectivePixelsCorrection", &SeeCube::getDefectivePixelsCorrection)
+        .def("setShutterlessCorrection", &SeeCube::setShutterlessCorrection)
+        .def("getShutterlessCorrection", &SeeCube::getShutterlessCorrection)
+        .def("setRadiometricCorrection", &SeeCube::setRadiometricCorrection)
+        .def("getRadiometricCorrection", &SeeCube::getRadiometricCorrection)
+        .def("getSensorTemperature", &SeeCube::getSensorTemperature)
+        .def("getPixelTemperature", &SeeCube::getPixelTemperature)
+        .def("setMappingMode", &SeeCube::setMappingMode)
+        .def("getMappingMode", &SeeCube::getMappingMode)
+        .def("setColumnDestriping", &SeeCube::setColumnDestriping)
+        .def("getColumnDestriping", &SeeCube::getColumnDestriping)
+        .def("setTemporalFiltering", &SeeCube::setTemporalFiltering)
+        .def("getTemporalFiltering", &SeeCube::getTemporalFiltering)
+        .def("softwareTriggerRequest", &SeeCube::softwareTriggerRequest);
+        
 }
