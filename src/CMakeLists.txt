@@ -35,3 +35,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${MY_SHARED_LIB})
 # libusb
 # opencv: core, highgui, imgcodecs, imgproc, videoio
 # rdynamic
+
+#Ensure that the correct libraries are included.
+# These libraries are what is used in the example repo.
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(LIBUSB REQUIRED libusb-1.0)
+target_include_directories(${PROJECT_NAME} PRIVATE ${LIBUSB_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBUSB_LIBRARIES})
+
