@@ -7,6 +7,7 @@
 
 //Include needed pybind stuff.
 #include <pybind11/pybind11.h>
+//#include <pybind11/stl.h>
 
 // The SeeCube SDK header(s)
 #include <SeeCube_SDK_user.h>
@@ -49,6 +50,7 @@ PYBIND11_MODULE(py_seecube, handle) {
         .value("histEq", SeeCube::mapping::histEq)
         .value("adaptive", SeeCube::mapping::adaptive);
 
+    /*
     py::class_<SeeCube>(sc_cls, "metadata")
         .def(py::init<>())
         .def_readwrite("sensorTemperature", &SeeCube::metadata::sensorTemperature)
@@ -56,6 +58,7 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def_readwrite("relativeTimestamp", &SeeCube::metadata::relativeTimestamp)
         .def_readwrite("epochTimestamp", &SeeCube::metadata::epochTimestamp)
         .def_readwrite("histogram", &SeeCube::metadata::histogram);
+    */
 
     sc_cls
         .def(py::init<const int&, const std::string&>(),
@@ -79,12 +82,14 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def("openShutter", &SeeCube::openShutter)
         .def("setColorPreset", &SeeCube::setColorPreset)
         .def("getColorPreset", &SeeCube::getColorPreset)
-        .def("setDefectivePixelsCorrection",
-                py::overload_cast<const bool&>(&SeeCube::setDefectivePixelsCorrection),
-                py::arg("pStatus"))
-        .def("setDefectivePixelsCorrection",
-                py::overload_cast<>(&SeeCube::setDefectivePixelsCorrection))
-        //.def("getDefectivePixelsCorrection", &SeeCube::getDefectivePixelsCorrection)
+        .def("setDefectivePixelsCorrection", &SeeCube::setDefectivePixelsCorrection)
+
+        //Overloaded function
+        .def("getDefectivePixelsCorrection",
+                static_cast<bool (SeeCube::*)()>(&SeeCube::getDefectivePixelsCorrection))
+        .def("getDefectivePixelsCorrection",
+                static_cast<bool (SeeCube::*)(std::vector<std::pair<int, int>>&)>(&SeeCube::getDefectivePixelsCorrection),
+                py::arg("pDefectivePixelsList"))
         .def("setShutterlessCorrection", &SeeCube::setShutterlessCorrection)
         .def("getShutterlessCorrection", &SeeCube::getShutterlessCorrection)
         .def("setRadiometricCorrection", &SeeCube::setRadiometricCorrection)
