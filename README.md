@@ -37,8 +37,19 @@ mkdir ./build && cd ./build
 cmake ..
 make check -j 4
 
+```
+
+**Running cpputests(unix):**
+```sh
+echo 1 | ./otto.sh
+```
+After running the above line in terminal the output should be inside the
+`./build/src/` sub-directory as an shared library file.
 
 
+**Building shared library(unix):**
+```sh
+echo 2 | ./otto.sh
 ```
 
 
