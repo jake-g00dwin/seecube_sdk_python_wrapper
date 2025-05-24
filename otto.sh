@@ -8,7 +8,7 @@ CMAKE_VERBOSE="ON"
 CROSS_COMPILE=1
 TEMPLATE_FILES=".template_files"
 MODULE_DIR="${TEMPLATE_FILES}/modules"
-PROJECT_NAME="SeeCubeSDK_PyWrapper"
+PROJECT_NAME="py_seecube"
 
 
 format_source_code () {

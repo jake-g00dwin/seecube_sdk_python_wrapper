@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 # Use the fancy version substitution
-project(SeeCubeSDK_PyWrapper
+project(py_seecube
     VERSION 0.1.0
     DESCRIPTION "A python wrapper for the SeeCube SDK"
     LANGUAGES   C CXX
