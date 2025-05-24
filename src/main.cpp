@@ -57,4 +57,8 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def_readwrite("epochTimestamp", &SeeCube::metadata::epochTimestamp)
         .def_readwrite("histogram", &SeeCube::metadata::histogram);
 
+    sc_cls
+        .def(py::init<const int&, const std::string&>(),
+                py::arg("pHandle"), py::arg("mSensorDataPath"))
+        .def("getPartNumber", &SeeCube::getPartNumber);
 }
