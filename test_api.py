@@ -1,5 +1,6 @@
 # Date: 2025-05-22
 # FileName: test_api.py
+# Description: A file to test the python interface to SeeCubeSDK library.
 
 import pytest
 import py_seecube
