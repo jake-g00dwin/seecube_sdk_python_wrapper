@@ -47,13 +47,13 @@ make check -j 4
 
 - [ ] Establish version number/tag system.
 - [ ] Create release & tag for current SDK version.
-- [ ] Add automatic OS detection.
-- [ ] Setup to load shared library(multiple platforms).
+- [X] Add automatic OS detection.
+- [X] Setup to load shared library(multiple platforms).
 - [ ] Add pytest files.
 - [ ] Add API documentation.
 - [X] Setup project structure for C/C++ development.
 - [X] Automate the building of C interface.
-- [ ] Update doxygen configuration.
+- [X] Update doxygen configuration.
 - [X] Add pybind11 as git sub-module.
 
 
