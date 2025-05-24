@@ -12,3 +12,8 @@ def f():
 def test_mytest():
     with pytest.raises(SystemExit):
         f()
+
+
+def test_SeeCubeSDKClassInstance():
+    sc_sdk = py_seecube.SeeCubeSDK(
+            py_seecube.SeeCubeSDK.verbosityLevel.info, 1)
