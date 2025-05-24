@@ -53,6 +53,16 @@ echo 2 | ./otto.sh
 ```
 
 
+## Testing
+
+In order to ensure the integrity of the bindings and their correctness the
+bindings need to be tested.
+
+Testing of the build system and it's automation for the detection of it's host 
+system is also needed ideally.
+
+
+
 
 ## RoadMap
 
@@ -66,7 +76,5 @@ echo 2 | ./otto.sh
 - [X] Automate the building of C interface.
 - [X] Update doxygen configuration.
 - [X] Add pybind11 as git sub-module.
-
-
 
 
