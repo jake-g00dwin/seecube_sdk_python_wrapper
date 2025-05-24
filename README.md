@@ -51,9 +51,8 @@ make check -j 4
 - [ ] Setup to load shared library(multiple platforms).
 - [ ] Add pytest files.
 - [ ] Add API documentation.
-- [ ] Create C interface for C++ header.
 - [X] Setup project structure for C/C++ development.
-- [ ] Automate the building of C interface.
+- [X] Automate the building of C interface.
 - [ ] Update doxygen configuration.
 - [X] Add pybind11 as git sub-module.
 
