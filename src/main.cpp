@@ -60,5 +60,10 @@ PYBIND11_MODULE(py_seecube, handle) {
     sc_cls
         .def(py::init<const int&, const std::string&>(),
                 py::arg("pHandle"), py::arg("mSensorDataPath"))
-        .def("getPartNumber", &SeeCube::getPartNumber);
+        .def("getPartNumber", &SeeCube::getPartNumber)
+        .def("getSerialNumber", &SeeCube::getSerialNumber)
+        .def("getSensorSettings", &SeeCube::getSensorSettings)
+        .def("getDeviceFrameRate", &SeeCube::getDeviceFrameRate)
+        .def("setDeviceFrameRate", &SeeCube::setDeviceFrameRate)
+        .def("getImageSize", &SeeCube::getImageSize);
 }
