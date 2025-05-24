@@ -50,15 +50,14 @@ PYBIND11_MODULE(py_seecube, handle) {
         .value("histEq", SeeCube::mapping::histEq)
         .value("adaptive", SeeCube::mapping::adaptive);
 
-    /*
-    py::class_<SeeCube>(sc_cls, "metadata")
+
+    py::class_<SeeCube::metadata>(sc_cls, "metadata")
         .def(py::init<>())
         .def_readwrite("sensorTemperature", &SeeCube::metadata::sensorTemperature)
         .def_readwrite("frameCounter", &SeeCube::metadata::frameCounter)
         .def_readwrite("relativeTimestamp", &SeeCube::metadata::relativeTimestamp)
         .def_readwrite("epochTimestamp", &SeeCube::metadata::epochTimestamp)
         .def_readwrite("histogram", &SeeCube::metadata::histogram);
-    */
 
     sc_cls
         .def(py::init<const int&, const std::string&>(),
