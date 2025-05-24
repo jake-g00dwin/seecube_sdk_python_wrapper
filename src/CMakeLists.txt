@@ -30,3 +30,8 @@ message("Shared library path: ${MY_SHARED_LIB}")
 
 # Link with the correct shared library from the SDK.
 target_link_libraries(${PROJECT_NAME} PRIVATE ${MY_SHARED_LIB})
+
+# Stuff that still needs linked:
+# libusb
+# opencv: core, highgui, imgcodecs, imgproc, videoio
+# rdynamic
