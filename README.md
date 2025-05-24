@@ -3,28 +3,35 @@ A Python SDK wrapper/interface for the seecube sdk
 
 ## Description
 
-The SDK in question uses a header file `*.h` with object oriented code and
-making use of C++ keywords in the header file.
+This repo is setup to automate the process of building the needed python module
+to interface with the SeeCubeSDK library.
 
-In order to make the library compatable for use with python's ctype module the
-C++ needs to be wrapped with an C interface.
-
-I admit to finding in somewhat strange that the SDK didn't opt to use C for at
-least the external interface as it's pretty much the standard for offering 
-interoperability between programming langauges.
-
-A secondary option is the pybind11 library, which is meant for writting 
-bindings for CPP but does introduce a external dependency.
 
 ## Requirements
 
 - Python3.10
 - pybind11, for C++ to python bindings.
 - pytest, for unit testing.
-- Cmake, for building the 
+- Cmake, for building the library.
+- All the libraries normally required for the SeeCubeSDK.
 
 
-## Usage
+## Python Usage
+
+To load the module/library from python first navigate to the directory where
+the module is located then import it.
+
+```sh
+python3.10
+>>>import py_seecube
+>>>sc_sdk = py_seecube.SeeCubeSDK(py_seecube.SeeCubeSDK.verbosityLevel.info, 1)
+```
+
+As you can see from the example above it functions as a normal python module, 
+but you may want to cut down it's length a bit using something like
+`import py_seecube as psc` for instance.
+
+## Building 
 
 During setup after copying or cloning the repo:
 
