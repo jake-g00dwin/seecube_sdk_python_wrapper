@@ -13,8 +13,7 @@ to interface with the SeeCubeSDK library.
 - pybind11, for C++ to python bindings.
 - pytest, for unit testing.
 - Cmake, for building the library.
-- All the libraries normally required for the SeeCubeSDK.
-
+- OpenCV
 
 ## Python Usage
 
@@ -32,6 +31,13 @@ but you may want to cut down it's length a bit using something like
 `import py_seecube as psc` for instance.
 
 ## Building 
+
+**Setting execution for scripts:**
+```sh
+sudo chmod +x ./otto.sh
+sudo chmod +x ./setup.sh
+
+```
 
 During setup after copying or cloning the repo:
 
