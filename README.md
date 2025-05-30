@@ -15,6 +15,30 @@ to interface with the SeeCubeSDK library.
 - Cmake, for building the library.
 - OpenCV
 
+For new installs it's reccommended to run the setup script file for your 
+system.
+
+The setup scripts will automate the process of installing the dependencies
+needed for both building and testing the system.
+
+**Unix(BASH):**
+```sh
+#Set script as executable.
+chmod +x ./setup.sh
+
+#Run script to install dependencies.
+./setup.sh
+```
+
+**Windows(PowerShell):**
+
+To run the script you can execute it from an admin powershell instance or you
+may right click the power shell script install and run it as admin.
+
+```
+./setup.ps1
+```
+
 ## Python Usage
 
 To load the module/library from python first navigate to the directory where
