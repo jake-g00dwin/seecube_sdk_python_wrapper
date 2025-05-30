@@ -103,7 +103,7 @@ system is also needed ideally.
 
 ## RoadMap
 
-- [ ] Establish version number/tag system.
+- [X] Establish version number/tag system.
 - [ ] Create release & tag for current SDK version.
 - [X] Add automatic OS detection.
 - [X] Setup to load shared library(multiple platforms).
@@ -113,5 +113,5 @@ system is also needed ideally.
 - [X] Automate the building of C interface.
 - [X] Update doxygen configuration.
 - [X] Add pybind11 as git sub-module.
-
+- [ ] setup pytesting via script.
 
