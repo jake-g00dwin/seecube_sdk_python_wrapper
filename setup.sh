@@ -8,7 +8,7 @@ DEBIAN=0
 FBSD=0
 SYSINSTALL=0
 DEV_UTILS="vim tmux fzf"
-
+PY_VER="python3.10"
 
 install_pkg () {
     PKG=$1
@@ -56,10 +56,16 @@ install_needed_dependencies () {
     echo "checking the OS..."
     check_os
 
+    echo "Installing dependencies..."
     install_pkg "cmake"
     install_pkg "git"
     install_pkg "clang"
-    install_pkg "python3.10"
+    install_pkg "${PY_VER}"
+
+    # Install python modules/libraries.
+    echo "Installing Python Modules..."
+    $PY_VER -m pip install pytest
+    $PY_VER -m pip install opencv-python   
 }
 
 

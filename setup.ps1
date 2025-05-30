@@ -49,6 +49,33 @@ function Install-Package {
 }
 
 
+# Install python packages using pip.
+function Install-PipPackage {
+    param (
+        [Parameter(Mandatory=$true)]
+        [string]$Package
+    )
+
+    $pip = Get-Command pip -ErrorAction SilentlyContinue
+
+    if (-not $pip) {
+        Write-Warning "pip not found in PATH. Trying python -m pip..."
+        $python = Get-Command python -ErrorAction SilentlyContinue
+        if ($python) {
+            $pipCmd = "$($python.Source) -m pip"
+        } else {
+            Write-Error "Python is not installed or not found in PATH."
+            return
+        }
+    } else {
+        $pipCmd = $pip.Source
+    }
+
+    Write-Host "Installing pip package: $pkg"
+    & $pipCmd install $pkg
+}
+
+
 # #############################
 # Start of main script.  
 # #############################
@@ -60,4 +87,8 @@ Install-Package -PackageId "Git.Git" -DisplayName "Git"
 Install-Package -PackageId "Python.Python3.10" -DisplayName "Python 3.10"
 Install-Package -PackageId "Kitware.CMake" -DisplayName "CMake"
 Install-Package -PackageId "LLVM.LLVM" -DislpayName "LLVM/Clang"
+
+# Now install python packages needed using pip.
+Install-PipPackage -Package "pytest"
+Install-PipPackage -Package "opencv-python"
 
