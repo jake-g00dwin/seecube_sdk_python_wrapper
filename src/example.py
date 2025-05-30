@@ -4,10 +4,10 @@
 
 import re
 import pytest
-import py_seecube
+#import py_seecube
 
 
-def exract_project_versione(file_path):
+def exract_project_version(file_path):
     version_pattern = re.compile(
             r'project\s*\([^\)]+VERSION\s+([\d\.]+)',
             re.IGNORECASE)
