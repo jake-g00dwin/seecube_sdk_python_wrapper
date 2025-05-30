@@ -10,6 +10,18 @@ SYSINSTALL=0
 DEV_UTILS="vim tmux fzf"
 
 
+install_pkg () {
+    PKG=$1
+    ICMD=""
+    if[ $DEBIAN -eq 1]; then
+        ICMD="sudo apt install ${PKG}"
+    elif [ $FBSD -eq 1]; then
+        ICMD="sudo pkg install ${PKG}"
+    fi
+
+    $ICMD
+}
+
 install_dev_utils () {
     ICMD=""
     if [ $DEBIAN -eq 1 ]; then
@@ -42,11 +54,12 @@ remove_template_examples () {
 install_needed_dependencies () {
     # Check the OS
     echo "checking the OS..."
-    # If it's debian based then apt install
-    
-    # If it's freeBSD then pkg
-    
-    # If it's windows....you're SOL
+    check_os
+
+    install_pkg "cmake"
+    install_pkg "git"
+    install_pkg "clang"
+    install_pkg "python3.10"
 }
 
 
@@ -80,7 +93,8 @@ default () {
 setup() {
     echo "Setting up env"
     check_os
-    install_dev_utils 
+    #install_dev_utils
+    install_needed_dependencies 
 }
 
 setup
