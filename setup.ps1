@@ -88,6 +88,11 @@ Install-Package -PackageId "Python.Python.3.10" -DisplayName "Python 3.10"
 Install-Package -PackageId "Kitware.CMake" -DisplayName "CMake"
 Install-Package -PackageId "LLVM.LLVM" -DislpayName "LLVM/Clang"
 
+# We need to do this so that we can find the new installed programs.
+# Refresh PATH from the registry (User and System)
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
+            [System.Environment]::GetEnvironmentVariable("Path", "User")
+
 # Now install python packages needed using pip.
 Install-PipPackage -Package "pytest"
 Install-PipPackage -Package "opencv-python"
