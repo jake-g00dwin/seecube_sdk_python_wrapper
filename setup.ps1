@@ -86,7 +86,9 @@ Show-Menu
 Install-Package -PackageId "Git.Git" -DisplayName "Git"
 Install-Package -PackageId "Python.Python.3.10" -DisplayName "Python 3.10"
 Install-Package -PackageId "Kitware.CMake" -DisplayName "CMake"
-Install-Package -PackageId "LLVM.LLVM" -DislpayName "LLVM/Clang"
+#Install-Package -PackageId "LLVM.LLVM" -DislpayName "LLVM/Clang"
+Install-Package -PackageId "Microsoft.VisualStudio.2022.BuildTools" -DisplayName "VisualStudio"
+
 
 # We need to do this so that we can find the new installed programs.
 # Refresh PATH from the registry (User and System)
