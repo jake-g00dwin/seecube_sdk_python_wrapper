@@ -45,7 +45,7 @@ function Install-Package {
     )
 
     Write-Host "`nInstalling $DisplayName"
-    winget install --id $Package -e --source winget
+    winget install --id $PackageId -e --source winget
 }
 
 
