@@ -71,8 +71,8 @@ function Install-PipPackage {
         $pipCmd = $pip.Source
     }
 
-    Write-Host "Installing pip package: $pkg"
-    & $pipCmd install $pkg
+    Write-Host "Installing pip package: $Package"
+    & $pipCmd install $Package
 }
 
 
@@ -92,6 +92,11 @@ Install-Package -PackageId "LLVM.LLVM" -DislpayName "LLVM/Clang"
 # Refresh PATH from the registry (User and System)
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" +
             [System.Environment]::GetEnvironmentVariable("Path", "User")
+
+
+# Upgrade pip, usally needs updated.
+Write-Host "Upgrading python package manager: pip"
+python.exe -m pip install --upgrade pip
 
 # Now install python packages needed using pip.
 Install-PipPackage -Package "pytest"
