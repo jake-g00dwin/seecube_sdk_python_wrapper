@@ -84,7 +84,7 @@ Check-Requirements
 Show-Menu
 
 Install-Package -PackageId "Git.Git" -DisplayName "Git"
-Install-Package -PackageId "Python.Python3.10" -DisplayName "Python 3.10"
+Install-Package -PackageId "Python.Python.3.10" -DisplayName "Python 3.10"
 Install-Package -PackageId "Kitware.CMake" -DisplayName "CMake"
 Install-Package -PackageId "LLVM.LLVM" -DislpayName "LLVM/Clang"
 
