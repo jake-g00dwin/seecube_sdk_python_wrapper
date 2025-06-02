@@ -35,6 +35,10 @@ chmod +x ./setup.sh
 To run the script you can execute it from an admin powershell instance or you
 may right click the power shell script install and run it as admin.
 
+If you system isn't setup already to run unsigned powershell scripts you can
+follow the instructions in the `windows_install.md` file located in the repos
+root directory.
+
 ```
 ./setup.ps1
 ```
