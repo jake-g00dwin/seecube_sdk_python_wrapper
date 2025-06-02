@@ -28,5 +28,5 @@ will need to install it following the instructions below.
 7. Run the setup script using: `.\setup.ps1`.
 8. Wait for the entire script to finish running and installing software.
 9. Exit powershell once script is finished.
-
+10. Restart the system.
 
