@@ -11,7 +11,7 @@
 
 function Check-Requirements {
     # First check if the script is being ran under admin.
-    if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole('Administrator')) {
+    if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
         Write-Warning "You need to run this script as Administrator."
         exit 1
     }
