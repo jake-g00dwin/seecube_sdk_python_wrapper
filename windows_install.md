@@ -28,5 +28,8 @@ will need to install it following the instructions below.
 7. Run the setup script using: `.\setup.ps1`.
 8. Wait for the entire script to finish running and installing software.
 9. Exit powershell once script is finished.
-10. Restart the system.
+10. From the start menu open the Visual Studio Installer.
+11. Click the modify button for visual studio community.
+12. Select `Desktop Development with C++` under workloads.
+13. Click modify to install all required components. 
 
