@@ -30,12 +30,12 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Request C 17 standard features
 set(CMAKE_C_STANDARD 17)
 set(CMAKE_C_STANDARD_REQUIRED True)
-set(CMAKE_C_FLAGS "-Wall -Wpedantic")
+#set(CMAKE_C_FLAGS "-Wall -Werror -Wpedantic")
 
 # SETUP THE CXX flags for .cpp
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-Wall -Wpedantic")
+#set(CMAKE_CXX_FLAGS "-Wall -Werror -Wpedantic")
 
 # #######################################
 # TESTING STUFF 
