@@ -10,16 +10,21 @@ set(SHARED_SDK "SeeCube")
 #Ensure that the correct libraries are included.
 # These libraries are what is used in the example repo.
 
-find_package(PkgConfig REQUIRED)
 
 # Determine the correct shared library to link
 if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
     # If the system is a linux based system then it coulb be x86 or arm
-    
+
+    find_package(PkgConfig REQUIRED)
+
     pkg_check_modules(LIBUSB REQUIRED libusb-1.0)
     target_include_directories(${PROJECT_NAME} PRIVATE ${LIBUSB_INCLUDE_DIRS})
     target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBUSB_LIBRARIES})
 
+    find_package(OpenCV REQUIRED)
+#pkg_check_modules(OPENCV REQUIRED OpenCV)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${OpenCV_LIBS})
 
     if(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64|amd64")
         message("Setting linux_x86 lib")
@@ -42,8 +47,4 @@ message("Shared library path: ${MY_SHARED_LIB}")
 target_link_libraries(${PROJECT_NAME} PRIVATE ${MY_SHARED_LIB})
 
 
-find_package(OpenCV REQUIRED)
-#pkg_check_modules(OPENCV REQUIRED OpenCV)
-target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} PRIVATE ${OpenCV_LIBS})
 
