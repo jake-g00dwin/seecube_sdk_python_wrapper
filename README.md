@@ -58,7 +58,22 @@ As you can see from the example above it functions as a normal python module,
 but you may want to cut down it's length a bit using something like
 `import py_seecube as psc` for instance.
 
-## Building 
+## Building (Windows)
+
+1. Open VisualStudio Development terminal(powershell).
+2. Navigate to the project root directory.
+3. Follow the commands below.
+
+```sh
+mkdir ./build
+cd ./build
+cmake ..; msbuild py_seecube
+```
+Once the build process is finished the library/python module will be in the
+`build/src/Debug/` sub-directory.
+
+
+## Building (Linux/Unix) 
 
 **Setting execution for scripts:**
 ```sh
