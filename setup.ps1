@@ -86,12 +86,12 @@ Show-Menu
 Install-Package -PackageId "Git.Git" -DisplayName "Git"
 Install-Package -PackageId "Python.Python.3.10" -DisplayName "Python 3.10"
 Install-Package -PackageId "Kitware.CMake" -DisplayName "CMake"
-Install-Package -PackageId "MSYS2.MSYS2" -DisplayName "MSYS2"
+#Install-Package -PackageId "MSYS2.MSYS2" -DisplayName "MSYS2"
 
 #Write-Host "NOTE: LLMV can take awhile to install on some systems!"
 #Install-Package -PackageId "LLVM.LLVM" -DislpayName "LLVM/Clang"
-#Install-Package -PackageId "Microsoft.VisualStudio.2022.BuildTools" -DisplayName "VisualStudio"
 Install-Package -PackageId "Microsoft.VisualStudio.2022.Community" -DisplayName "VisualStudio"
+Install-Package -PackageId "Microsoft.VisualStudio.2022.BuildTools" -DisplayName "VisualStudio"
 
 # We need to do this so that we can find the new installed programs.
 # Refresh PATH from the registry (User and System)
