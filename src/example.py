@@ -5,6 +5,7 @@
 import re
 # import pytest
 # import py_seecube
+import cv2 as cv
 
 
 def exract_project_version(file_path):
@@ -24,13 +25,56 @@ def exract_project_version(file_path):
         print(f"Error reading file: {e}")
 
 
-def cli_menu():
+def intro_print():
     print("SeeCube SDK pybindings Example:")
+    print("OpenCV version:", cv.__version__)
+
+
+def cli_menu():
     print("")
 
 
 def main():
+    intro_print()
     cli_menu()
+
+    # Initalize the SeeCubeSDK.
+    # py_seecube.
+
+    # Enable Histogram overlay.
+
+    # Get the number of conected devices.
+
+    # If there is at least one device connected.
+
+        # Try to connect to the first availble device.
+
+        # Check if the device connection was sucessful.
+
+        # Get and print out device parameters.
+
+        # Allocate memory in C/Cpp style for metadata.
+
+        # Set the mapping mode to histogram.
+
+        # Set the color preset value to 10.
+
+        # Set the processing frame rate to 60FPS.
+
+       # Retrive current image processing status.
+
+       # Allocate memory for images.
+
+       # Create OpenCV window for viewing images.
+
+       # Create OpenCV window for viewing color images.
+
+       # Setup OpenCV loop.
+
+       # Configure video saving and JPEG compression.
+
+       # PUT WHILE LOOP HERE!
+
 
 
 # Call The main function
