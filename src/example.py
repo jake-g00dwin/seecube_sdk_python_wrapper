@@ -46,8 +46,9 @@ def main():
     # Get the number of conected devices.
 
     # If there is at least one device connected.
-
+    if(True):
         # Try to connect to the first availble device.
+        print("Attempting connection to device...")
 
         # Check if the device connection was sucessful.
 
@@ -61,20 +62,22 @@ def main():
 
         # Set the processing frame rate to 60FPS.
 
-       # Retrive current image processing status.
+        # Retrive current image processing status.
+        print("Gettign image processing status...")
 
-       # Allocate memory for images.
+        # Allocate memory for images.
 
-       # Create OpenCV window for viewing images.
+        # Create OpenCV window for viewing images.
 
-       # Create OpenCV window for viewing color images.
+        # Create OpenCV window for viewing color images.
 
-       # Setup OpenCV loop.
+        # Setup OpenCV loop.
 
-       # Configure video saving and JPEG compression.
+        # Configure video saving and JPEG compression.
 
-       # PUT WHILE LOOP HERE!
+        # PUT WHILE LOOP HERE!
 
+    exit(0)
 
 
 # Call The main function
