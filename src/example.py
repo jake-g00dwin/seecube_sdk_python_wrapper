@@ -51,16 +51,26 @@ def main():
         print("Attempting connection to device...")
 
         # Check if the device connection was sucessful.
+        is_connected = False
+        if(not is_connected):
+            print("Error: Failed to connect to device!")
+            exit(1)
+        else:
+            print("Success: Device now connected.")
 
         # Get and print out device parameters.
+        print("Device Parameters:\n")
 
         # Allocate memory in C/Cpp style for metadata.
 
         # Set the mapping mode to histogram.
+        print("Setting mapping mode: histogram")
 
         # Set the color preset value to 10.
+        print("Setting color preset value: 10")
 
         # Set the processing frame rate to 60FPS.
+        print("Setting frame rate: 60")
 
         # Retrive current image processing status.
         print("Gettign image processing status...")
