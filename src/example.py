@@ -1,10 +1,10 @@
 # Date: 2025-05-29
 # FileName: example.py
-# Description: Example/Demo of SeeCube SDK python bindings. 
+# Description: Example/Demo of SeeCube SDK python bindings.
 
 import re
-import pytest
-#import py_seecube
+# import pytest
+# import py_seecube
 
 
 def exract_project_version(file_path):
@@ -31,3 +31,7 @@ def cli_menu():
 
 def main():
     cli_menu()
+
+
+# Call The main function
+main()
