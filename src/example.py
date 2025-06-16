@@ -3,9 +3,10 @@
 # Description: Example/Demo of SeeCube SDK python bindings.
 
 import re
-# import pytest
-# import py_seecube
 import cv2 as cv
+
+# Import the python bindings for the SeeCube SDK.
+import py_seecube
 
 # Global Variables.
 
@@ -46,7 +47,9 @@ def main():
     cli_menu()
 
     # Initalize the SeeCubeSDK.
-    # py_seecube.
+    # py_seecube
+    # sc_sdk = py_seecube
+    #    .SeeCubeSDK(py_seecube.SeeCubeSDK.verbosityLevel.info, 1)
 
     # Enable Histogram overlay.
 
@@ -97,5 +100,6 @@ def main():
     exit(0)
 
 
+# This is diabled by default when testing.
 # Call The main function
-main()
+# main()
