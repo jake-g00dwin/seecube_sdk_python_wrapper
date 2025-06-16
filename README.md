@@ -67,7 +67,9 @@ but you may want to cut down it's length a bit using something like
 ```sh
 mkdir ./build
 cd ./build
+# One of the below commands depending on versions.
 cmake ..; msbuild py_seecube
+cmake ..; msbuild ALL_BUILD.vcxproj
 ```
 Once the build process is finished the library/python module will be in the
 `build/src/Debug/` sub-directory.
