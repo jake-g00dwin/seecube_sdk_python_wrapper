@@ -48,6 +48,10 @@ root directory.
 To load the module/library from python first navigate to the directory where
 the module is located then import it.
 
+If you're running on windows you'll want to first copy the library files from
+the `src/windows/` sub-directory into the same location that the new library
+files are located.
+
 ```sh
 python3.10
 >>>import py_seecube
