@@ -14,11 +14,10 @@ module = type(sys)('py_seecube')
 module.add = sc_add
 sys.modules['py_seecube'] = module
 
+
+# A second method that worked I pulled out of pytest fixture.
 """
-@pytest.fixture(autouse=True, scope="session")
-def mock_py_seecube():
-    # Create a fake module with the same interface
-    fake_mod = types.ModuleType("py_seecube")
-    fake_mod.compute = lambda x: 999  # Stubbed result
-    sys.modules["py_seecube"] = fake_mod
+fake_mod = types.ModuleType("py_seecube")
+fake_mod.add = lambda a, b, X: a + b
+sys.modules["py_seecube"] = fake_mod
 """
