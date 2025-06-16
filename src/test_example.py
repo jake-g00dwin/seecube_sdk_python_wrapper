@@ -11,14 +11,6 @@ import example
 # fake_seecubesdk = types.ModuleType("py_seecube")
 # fake_seecubesdk.compute = lambada X: x = 45
 
-"""
-@pytest.fixture(autouse=True)
-def patch_py_seecube(monkeypatch):
-    fake_mod = types.ModuleType("py_seecube")
-    fake_mod.compute = lambda X: -1
-    sys.modules["py_seecube"] = fake_mod
-"""
-
 
 fake_cmake_text = """
 cmake_minimum_required(VERSION 3.20)
