@@ -69,7 +69,7 @@ def main():
         exit(1)
 
     for i in range(count):
-        print("Device: {}: {}\n".format(i, sc.getDeviceName(i)))
+        print("Device: {}: {}\n".format(i, sc_sdk.getDeviceName(i)))
 
     # Try to connect to the first device.
     device = sc.SeeCube()
