@@ -68,6 +68,7 @@ def main():
         print("Error: No devices found. Exiting program.")
         exit(1)
 
+    print("Displaying devices:\n")
     for i in range(count):
         print("Device: {}: {}\n".format(i, sc_sdk.getDeviceName(i)))
 
