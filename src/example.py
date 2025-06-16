@@ -6,7 +6,7 @@ import re
 import cv2 as cv
 
 # Import the python bindings for the SeeCube SDK.
-import py_seecube
+import py_seecube as sc
 
 # Global Variables.
 
@@ -44,7 +44,7 @@ def cli_menu():
 
 def self_test():
     print("cheking test function: add")
-    if(py_seecube.add(1, 1) == 2):
+    if(sc.add(1, 1) == 2):
         print("Sucess!")
     else:
         print("Failure: 1 + 1 != 2")
@@ -56,13 +56,23 @@ def main():
     cli_menu()
 
     # Initalize the SeeCubeSDK.
-    # py_seecube
-    # sc_sdk = py_seecube
-    #    .SeeCubeSDK(py_seecube.SeeCubeSDK.verbosityLevel.info, 1)
+    sc_sdk = sc.SeeCubeSDK(
+            sc.SeeCubeSDK.verbosityLevel.info, 1)
 
     # Enable Histogram overlay.
+    sc_sdk.parseCoreParameter("displayHistogram")
 
     # Get the number of conected devices.
+    count = sc_sdk.getDeviceCount()
+    if(count <= 0):
+        print("Error: No devices found. Exiting program.")
+        exit(1)
+
+    for i in range(count):
+        print("Device: {}: {}\n".format(i, sc.getDeviceName(i)))
+
+    # Try to connect to the first device.
+    device = sc.SeeCube()
 
     # If there is at least one device connected.
     if(True):
