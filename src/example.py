@@ -42,8 +42,17 @@ def cli_menu():
     print("")
 
 
+def self_test():
+    print("cheking test function: add")
+    if(py_seecube.add(1, 1) == 2):
+        print("Sucess!")
+    else:
+        print("Failure: 1 + 1 != 2")
+
+
 def main():
     intro_print()
+    self_test()
     cli_menu()
 
     # Initalize the SeeCubeSDK.
@@ -102,4 +111,4 @@ def main():
 
 # This is diabled by default when testing.
 # Call The main function
-# main()
+main()
