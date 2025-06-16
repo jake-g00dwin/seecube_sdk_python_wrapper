@@ -7,6 +7,13 @@ import re
 # import py_seecube
 import cv2 as cv
 
+# Global Variables.
+
+printDefectivePixels = False
+printMetadata = False
+printSensorTemperature = False
+printTargetTemperature = False
+
 
 def exract_project_version(file_path):
     version_pattern = re.compile(
