@@ -12,15 +12,41 @@
 // The SeeCube SDK header(s)
 #include <SeeCube_SDK_user.h>
 
+#include <string>
+#include <iostream>
+
 namespace py = pybind11;
 
 int add(int i, int j) {
     return i + j;
 }
 
+void test_SDKFunction(void) {
+    std::cout << "test_SDKFunction():" << std::endl;
+    std::cout << 
+        "If the program crashes it indicates it's not a python/binding issue." 
+        << std::endl;
+
+    SeeCubeSDK seeCubeSDK(SeeCubeSDK::verbosityLevel::info, 4);
+    seeCubeSDK.parseCoreParameter("displayHistogram");
+
+    int count = seeCubeSDK.getDeviceCount();
+    printf("Device count: %d\n", count);
+
+   //Now we try out getting the device name. This should work. 
+    int i = 0; //Device index
+
+    //std::print("Device {:d}: {:s}\n", i, seeCubeSDK.getDeviceName(i));
+    std::cout << 
+        "Device: " << i << 
+        ", " << seeCubeSDK.getDeviceName(i) << std::endl;
+
+}
+
 PYBIND11_MODULE(py_seecube, handle) {
     handle.doc() = "This is the module docs.";
     handle.def("add", &add);
+    handle.def("test_SDKFunction", &test_SDKFunction);
 
     // SeeCubeSDK SECTION:
     py::class_<SeeCubeSDK> cls(handle, "SeeCubeSDK");
