@@ -36,7 +36,16 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def(py::init<SeeCubeSDK::verbosityLevel, const int&>(),
                 py::arg("verbosityLevel"), py::arg("value")) // Constructor
         .def("getDeviceCount", &SeeCubeSDK::getDeviceCount)
-        .def("getDeviceName", &SeeCubeSDK::getDeviceName)
+        //.def("getDeviceName", &SeeCubeSDK::getDeviceName)
+        .def("getDeviceName", [](SeeCubeSDK &self, int pHandle) {
+                    try {
+                        return self.getDeviceName(pHandle);
+                    } catch (const std::exception& e) {
+                        throw std::runtime_error(std::string("C++ exeception: ") + e.what());
+                    } catch (...) {
+                        throw std::runtime_error("Unknown C++ exeception");
+                    }
+                })
         .def("isConnected", &SeeCubeSDK::isConnected)
         .def("parseCoreParameter", &SeeCubeSDK::parseCoreParameter);
 
