@@ -36,7 +36,7 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def(py::init<SeeCubeSDK::verbosityLevel, const int&>(),
                 py::arg("verbosityLevel"), py::arg("value")) // Constructor
         .def("getDeviceCount", &SeeCubeSDK::getDeviceCount)
-        .def("getDeviceName", &SeeCubeSDK::getDeviceName)
+        .def("getDeviceName", &SeeCubeSDK::getDeviceName, py::return_value_policy::copy)
         /*
         .def("getDeviceName", [](SeeCubeSDK &self, int pHandle) {
                     try {
