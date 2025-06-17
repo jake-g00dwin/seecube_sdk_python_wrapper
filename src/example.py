@@ -65,7 +65,8 @@ def main():
     # Get the number of conected devices.
     count = sc_sdk.getDeviceCount()
     if(count <= 0):
-        print("Error: No devices found. Exiting program.")
+        print("No device found\n")
+        print("Exiting...")
         exit(1)
 
     print("Displaying devices:\n")
@@ -73,49 +74,49 @@ def main():
         print("Device: {}: {}\n".format(i, sc_sdk.getDeviceName(i)))
 
     # Try to connect to the first device.
-    device = sc.SeeCube()
+    device = sc.SeeCube
 
     # If there is at least one device connected.
-    if(True):
-        # Try to connect to the first availble device.
-        print("Attempting connection to device...")
 
-        # Check if the device connection was sucessful.
-        is_connected = False
-        if(not is_connected):
-            print("Error: Failed to connect to device!")
-            exit(1)
-        else:
-            print("Success: Device now connected.")
+    # Try to connect to the first availble device.
+    print("Attempting connection to device...")
 
-        # Get and print out device parameters.
-        print("Device Parameters:\n")
+    # Check if the device connection was sucessful.
+    if(not sc_sdk.isConnected()):
+        print("Error: Failed to connect to device!\n")
+        print("Exiting...")
+        exit(1)
 
-        # Allocate memory in C/Cpp style for metadata.
+    print("Success: Device now connected.")
 
-        # Set the mapping mode to histogram.
-        print("Setting mapping mode: histogram")
+    # Get and print out device parameters.
+    print("Device Properties:\n")
 
-        # Set the color preset value to 10.
-        print("Setting color preset value: 10")
+    # Allocate memory in C/Cpp style for metadata.
 
-        # Set the processing frame rate to 60FPS.
-        print("Setting frame rate: 60")
+    # Set the mapping mode to histogram.
+    print("Setting mapping mode: histogram")
 
-        # Retrive current image processing status.
-        print("Gettign image processing status...")
+    # Set the color preset value to 10.
+    print("Setting color preset value: 10")
 
-        # Allocate memory for images.
+    # Set the processing frame rate to 60FPS.
+    print("Setting frame rate: 60")
 
-        # Create OpenCV window for viewing images.
+    # Retrive current image processing status.
+    print("Gettign image processing status...")
 
-        # Create OpenCV window for viewing color images.
+    # Allocate memory for images.
 
-        # Setup OpenCV loop.
+    # Create OpenCV window for viewing images.
 
-        # Configure video saving and JPEG compression.
+    # Create OpenCV window for viewing color images.
 
-        # PUT WHILE LOOP HERE!
+    # Setup OpenCV loop.
+
+    # Configure video saving and JPEG compression.
+
+    # PUT WHILE LOOP HERE!
 
     exit(0)
 
