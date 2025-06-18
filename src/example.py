@@ -122,9 +122,16 @@ def main():
 
     # Set the processing frame rate to 60FPS.
     print("Setting frame rate: 60")
+    device.setProcessingFrameRate(frame_rate)
+    free_run = device.getFreeRun()
 
     # Retrive current image processing status.
-    print("Gettign image processing status...")
+    print("Getting image processing status...")
+    flat_field_correction = device.getFFC()
+    column_destriping = device.getColumnDestriping()
+    # TODO: get vector bindings setup.
+    defective_pixels_correction =
+    device.getDefectivePixelsCorrection(defective_pixels_list)
 
     # Allocate memory for images.
 
