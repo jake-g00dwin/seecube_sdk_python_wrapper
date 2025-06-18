@@ -109,6 +109,11 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def("getDeviceFrameRate", &SeeCube::getDeviceFrameRate)
         .def("setDeviceFrameRate", &SeeCube::setDeviceFrameRate)
         .def("getImageSize", &SeeCube::getImageSize)
+        .def("getImageSize", [](SeeCube &self) {
+                size_t width, height;
+                self.getImageSize(width, height); 
+                return std::make_tuple(width, height);
+                })
         .def("getRawFrame", &SeeCube::getRawFrame)
         .def("getColorFrame", &SeeCube::getColorFrame)
         .def("getProcessingFrameRate", &SeeCube::getProcessingFrameRate)
