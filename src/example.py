@@ -112,7 +112,9 @@ def main():
 
     # Set the mapping mode to histogram.
     print("Setting mapping mode: histogram")
-
+    mapping = device.getMappingMode()
+    mapping = sc.mapping.histEq
+    device.setMappingMode(mapping)
 
     # Set the color preset value to 10.
     print("Setting color preset value: 10")
