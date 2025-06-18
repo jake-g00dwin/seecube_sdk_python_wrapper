@@ -100,9 +100,17 @@ def main():
     print("Sensor settings TINT={} GFID={} GSK={} GAIN={}\n".format(
         tint, gfid, gsk, gain))
 
+    # Get the frame rate setting.
+    frame_rate = device.getDeviceFrameRate()
+    print("Device frame rate: {}\n".format(frame_rate))
+
+    # Get the image size.
+    width, height = device.getImageSize()
+
 
     # Set the mapping mode to histogram.
     print("Setting mapping mode: histogram")
+
 
     # Set the color preset value to 10.
     print("Setting color preset value: 10")
