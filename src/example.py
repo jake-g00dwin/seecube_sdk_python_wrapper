@@ -74,7 +74,8 @@ def main():
         print("Device: {}: {}\n".format(i, sc_sdk.getDeviceName(i)))
 
     # Try to connect to the first device.
-    device = sc.SeeCube
+    # Default is handle 0 and filepath ""
+    device = sc.SeeCube()
 
     # If there is at least one device connected.
 
@@ -91,6 +92,8 @@ def main():
 
     # Get and print out device parameters.
     print("Device Properties:\n")
+    print("Part number: " + str(device.getPartNumber()))
+    print("Serial: " + str(device.getSerialNumber()))
 
     # Allocate memory in C/Cpp style for metadata.
 
