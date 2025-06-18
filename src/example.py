@@ -95,7 +95,11 @@ def main():
     print("Part number: " + str(device.getPartNumber()))
     print("Serial: " + str(device.getSerialNumber()))
 
-    # Allocate memory in C/Cpp style for metadata.
+    # Print out sensor settings.
+    tint, gfid, gsk, gain = device.getSensorSettings()
+    print("Sensor settings TINT={} GFID={} GSK={} GAIN={}\n".format(
+        tint, gfid, gsk, gain))
+
 
     # Set the mapping mode to histogram.
     print("Setting mapping mode: histogram")
