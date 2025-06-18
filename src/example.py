@@ -118,6 +118,7 @@ def main():
 
     # Set the color preset value to 10.
     print("Setting color preset value: 10")
+    device.setColorPreset(10)
 
     # Set the processing frame rate to 60FPS.
     print("Setting frame rate: 60")
