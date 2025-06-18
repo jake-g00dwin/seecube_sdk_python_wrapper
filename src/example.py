@@ -106,7 +106,9 @@ def main():
 
     # Get the image size.
     width, height = device.getImageSize()
+    print("Image size: {}x{}\n".format(width, height))
 
+    # Allocate memory for metadata.
 
     # Set the mapping mode to histogram.
     print("Setting mapping mode: histogram")
