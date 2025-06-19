@@ -6,6 +6,12 @@ A Python SDK wrapper/interface for the seecube sdk
 This repo is setup to automate the process of building the needed python module
 to interface with the SeeCubeSDK library.
 
+**Library Handling:**
+
+The shared library files that you can use with this seem to come in different 
+builds that support various serial numbers of cameras.
+
+
 
 ## Requirements
 
