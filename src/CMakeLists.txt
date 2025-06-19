@@ -54,6 +54,8 @@ elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
     message("Setting windows lib")
     message("##############################\n\n")
     # There is both the debug and release libraries availble.
+    # In it's current state you have to manually copy the Lib and dll files
+    # for the debug ones into the build dir.
     set(MY_SHARED_LIB "${CMAKE_SOURCE_DIR}/src/windows/${SDK_SERIAL}/SeeCubed.lib")
     #set(MY_SHARED_LIB "${CMAKE_SOURCE_DIR}/src/windows/${SDK_SERIAL}/SeeCube.lib")
 endif()
