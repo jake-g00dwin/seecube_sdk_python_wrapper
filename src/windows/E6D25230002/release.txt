@@ -1,0 +1,5 @@
+Timestamp: 13/06/2025 02:41:00
+Repository: gitlab.com:senssight/Software/seecube-sdk-opencv-sample
+Commit Hash: d210840a
+Target OS: windows
+Supported core serial numbers: E6D25230002
