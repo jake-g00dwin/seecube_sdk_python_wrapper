@@ -1,0 +1,7 @@
+Timestamp: 28/04/2025 22:18:47
+Repository: gitlab.com:senssight/Software/seecube-sdk-opencv-sample
+Commit Hash: d210840a
+Target OS: linux
+Target Architecture: aarch64
+Target Platform: Raspberry Pi 2024-11-19
+Supported core serial numbers: E6D25080001 N1225140005 E3x25110003
