@@ -36,7 +36,8 @@ if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
 # For windows based systems, there is only one sdk.
 elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
     message("Setting windows lib")
-    set(MY_SHARED_LIB "${CMAKE_SOURCE_DIR}/src/windows/SeeCube.lib")
+    #set(MY_SHARED_LIB "${CMAKE_SOURCE_DIR}/src/windows/SeeCube.lib")
+    set(MY_SHARED_LIB "${CMAKE_SOURCE_DIR}/src/windows/SeeCube.dll")
 endif()
 
 message("Shared library path: ${MY_SHARED_LIB}")
