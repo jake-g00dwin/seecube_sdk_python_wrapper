@@ -75,7 +75,7 @@ def main():
 
     # Try to connect to the first device.
     # Default is handle 0 and filepath ""
-    device = sc.SeeCube()
+    device = sc.SeeCube(0, "")
 
     # If there is at least one device connected.
 
