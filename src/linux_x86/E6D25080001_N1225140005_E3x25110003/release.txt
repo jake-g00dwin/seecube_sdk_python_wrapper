@@ -1,0 +1,7 @@
+Timestamp: 28/04/2025 22:19:45
+Repository: gitlab.com:senssight/Software/seecube-sdk-opencv-sample
+Commit Hash: d210840a
+Target OS: linux
+Target Architecture: x86_64
+Target Platform: Ubuntu 22.04 Desktop
+Supported core serial numbers: E6D25080001 N1225140005 E3x25110003
