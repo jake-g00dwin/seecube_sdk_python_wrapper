@@ -4,11 +4,19 @@
 
 import re
 import cv2 as cv
+import numpy as np
 
 # Import the python bindings for the SeeCube SDK.
 import py_seecube as sc
 
 # Global Variables.
+
+# These are set during the main function.
+width = 0
+height = 0
+NUMPIXELS = 0
+
+Bybass_Checks = True
 
 printDefectivePixels = False
 printMetadata = False
@@ -33,6 +41,50 @@ def exract_project_version(file_path):
         print(f"Error reading file: {e}")
 
 
+def controller(img, brightness=255, contrast=127):
+    brightness = int((brightness - 0) * (255 - (-255)) / (510 - 0) + (-255))
+    contrast = int((contrast - 0) * (127 - (-127)) / (254 - 0) + (-127))
+
+    if brightness != 0:
+        if brightness > 0:
+            shadow = brightness
+            max = 255
+        else:
+            shadow = 0
+            max = 255 + brightness
+
+        al_pha = (max - shadow) / 255
+        ga_mma = shadow
+
+        # The function addWeighted calculates
+        # the weighted sum of two arrays
+        cal = cv.addWeighted(img, al_pha, img, 0, ga_mma)
+
+    else:
+        cal = img
+    if contrast != 0:
+        Alpha = float(131 * (contrast + 127)) / (127 * (131 - contrast))
+        Gamma = 127 * (1 - Alpha)
+
+        # The function addWeighted calculates
+        # the weighted sum of two arrays
+        cal = cv.addWeighted(cal, Alpha, cal, 0, Gamma)
+
+    return cal
+
+
+def BrightnessContrast(img, brightness=0):
+    # getTrackbarPos returns the current
+    # position of the specified trackbar.
+    brightness = cv.getTrackbarPos("Brightness", "Brightness/Contrast")
+
+    contrast = cv.getTrackbarPos("Contrast", "Brightness/Contrast")
+
+    effect = controller(img, brightness, contrast)
+
+    return effect
+
+
 def intro_print():
     print("SeeCube SDK pybindings Example:")
     print("OpenCV version:", cv.__version__)
@@ -42,17 +94,8 @@ def cli_menu():
     print("")
 
 
-def self_test():
-    print("cheking test function: add")
-    if(sc.add(1, 1) == 2):
-        print("Sucess!")
-    else:
-        print("Failure: 1 + 1 != 2")
-
-
 def main():
     intro_print()
-    self_test()
     cli_menu()
 
     # Initalize the SeeCubeSDK.
@@ -83,7 +126,7 @@ def main():
     print("Attempting connection to device...")
 
     # Check if the device connection was sucessful.
-    if(not sc_sdk.isConnected()):
+    if(not sc_sdk.isConnected() and not Bybass_Checks):
         print("Error: Failed to connect to device!\n")
         print("Exiting...")
         exit(1)
@@ -107,6 +150,7 @@ def main():
     # Get the image size.
     width, height = device.getImageSize()
     print("Image size: {}x{}\n".format(width, height))
+    NUMPIXELS = width * height
 
     # Allocate memory for metadata.
     sc.allocate_metadata()
@@ -156,17 +200,32 @@ def main():
 
     # Create OpenCV window for viewing images.
     cv.namedWindow("Thermal frame", cv.WINDOW_NORMAL | cv.WINDOW_KEEPRATIO)
-    # cv.namedWindow("Brightness/Contrast", cv.WINDOW_GUI_EXPANDED)
 
     # Create OpenCV window for viewing color images.
-    # cv.namedWindow("CLAHE filter", cv.WINDOW_GUI_EXPANDED)
-    cv.namedWindow("Color frame", cv.WINDOW_NORMAL | cv.WINDOW_AUTOSIZE)
+    cv.namedWindow("Color frame", cv.WINDOW_NORMAL | cv.WINDOW_KEEPRATIO)
+
+    cv.createTrackbar(
+        "Brightness", "Brightness/Contrast", 255, 2 * 255, BrightnessContrast
+    )
+
+    # Contrast range -127 to 127
+    cv.createTrackbar(
+        "Contrast", "Brightness/Contrast", 127, 2 * 127, BrightnessContrast
+    )
 
     # Setup OpenCV loop.
+    while True:
+        # Check conditions for exiting or breaking out of loop.
+        key = cv.waitKey(16)
+        if key == ord("q"):
+            break
 
-    # Configure video saving and JPEG compression.
+        # Get the current image data.
+        thermal_img = np.zeros(NUMPIXELS, dtype=np.uint16)
+        color_img = np.zeros(NUMPIXELS, dtype=np.uint16)
 
-    # PUT WHILE LOOP HERE!
+        cv.imshow("Thermal frame", thermal_img)
+        cv.imshow("Color frame", color_img)
 
     # Clean up all the CV stuff.
     cv.destroyAllWindows()
