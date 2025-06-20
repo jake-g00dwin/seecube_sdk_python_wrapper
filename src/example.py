@@ -155,14 +155,21 @@ def main():
     sc.allocate_imagedata(width, height)
 
     # Create OpenCV window for viewing images.
+    cv.namedWindow("Thermal frame", cv.WINDOW_NORMAL | cv.WINDOW_KEEPRATIO)
+    # cv.namedWindow("Brightness/Contrast", cv.WINDOW_GUI_EXPANDED)
 
     # Create OpenCV window for viewing color images.
+    # cv.namedWindow("CLAHE filter", cv.WINDOW_GUI_EXPANDED)
+    cv.namedWindow("Color frame", cv.WINDOW_NORMAL | cv.WINDOW_AUTOSIZE)
 
     # Setup OpenCV loop.
 
     # Configure video saving and JPEG compression.
 
     # PUT WHILE LOOP HERE!
+
+    # Clean up all the CV stuff.
+    cv.destroyAllWindows()
 
     # Free all memory that was allocated for the program.
     sc.delete_metadata()
