@@ -151,8 +151,8 @@ def main():
     radiometricCorrection = device.getRadiometricCorrection()
     temporalFiltering = device.getTemporalFiltering()
 
-
-    # Allocate memory for images.
+    # Allocate memory for images; uses the size data.
+    sc.allocate_imagedata(width, height)
 
     # Create OpenCV window for viewing images.
 
@@ -166,6 +166,7 @@ def main():
 
     # Free all memory that was allocated for the program.
     sc.delete_metadata()
+    sc.delete_imagedata()
 
     exit(0)
 
