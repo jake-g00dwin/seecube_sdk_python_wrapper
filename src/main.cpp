@@ -17,12 +17,30 @@
 
 namespace py = pybind11;
 
+
+// Structs and typedefs
+
+// Define rgb color structure
+typedef struct {
+    uint8_t r, g, b;
+} rgb;
+
 // Putting globals here that get used later and have memory allocated.
 
-// Allocate memory for metadata
+// memory for metadata
 bool is_metadata_allocated;
 SeeCube::metadata thermalMetadata;
 SeeCube::metadata colorMetadata;
+
+
+// memory for images
+bool is_imagedata_allocated;
+uint16_t* thermalImg;
+rgb* colorImg;
+
+
+// Used for the defective pixel overlaoded methods.
+std::vector<std::pair<int, int>> defectivePixelsList;
 
 
 void allocate_metadata(void) {
@@ -43,7 +61,29 @@ void delete_metadata(void) {
     }
     delete [] thermalMetadata.histogram;
     delete [] colorMetadata.histogram; 
+    is_metadata_allocated = false;
 }
+
+void allocate_imagedata(size_t width, size_t height) {
+    if(is_imagedata_allocated){
+        std::cout << "Attempt to allocate already allocated memory!" << std::endl;
+        return;
+    }
+    uint16_t* thermalImg = new uint16_t[width * height * sizeof(uint16_t)];
+    rgb* colorImg = new rgb[width * height * sizeof(rgb)];
+    is_imagedata_allocated = true;
+}
+
+void delete_imagedata(void){
+    if(!is_imagedata_allocated){
+        std::cout << "Attempt to free unallocated memory!" << std::endl;
+        return; 
+    }
+    delete [] thermalImg;
+    delete [] colorImg; 
+    is_imagedata_allocated = false;
+}
+
 
 void test_SDKFunction(void) {
     std::cout << "test_SDKFunction():" << std::endl;
@@ -72,6 +112,8 @@ PYBIND11_MODULE(py_seecube, handle) {
     handle.def("test_SDKFunction", &test_SDKFunction);
     handle.def("allocate_metadata", &allocate_metadata);
     handle.def("delete_metadata", &delete_metadata);
+    handle.def("allocate_imagedata", &allocate_imagedata);
+    handle.def("delete_imagedata", &delete_imagedata);
 
     // SeeCubeSDK SECTION:
     py::class_<SeeCubeSDK> cls(handle, "SeeCubeSDK");
@@ -155,11 +197,16 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def("setDefectivePixelsCorrection", &SeeCube::setDefectivePixelsCorrection)
 
         //Overloaded function
-        .def("getDefectivePixelsCorrection",
+        .def("getDefectivePixelsCorrectionStatus",
                 static_cast<bool (SeeCube::*)()>(&SeeCube::getDefectivePixelsCorrection))
-        .def("getDefectivePixelsCorrection",
-                static_cast<bool (SeeCube::*)(std::vector<std::pair<int, int>>&)>(&SeeCube::getDefectivePixelsCorrection),
-                py::arg("pDefectivePixelsList"))
+        .def("getDefectivePixelsCorrection", [](SeeCube &self) {
+                    std::vector<std::pair<int, int>> defective_pixels;
+                    bool result = self.getDefectivePixelsCorrection(defective_pixels);
+                    return py::make_tuple(result, defective_pixels);
+                })
+        //.def("getDefectivePixelsCorrection",
+        //        static_cast<bool (SeeCube::*)(std::vector<std::pair<int, int>>&)>(&SeeCube::getDefectivePixelsCorrection),
+        //        py::arg("pDefectivePixelsList"))
         .def("setShutterlessCorrection", &SeeCube::setShutterlessCorrection)
         .def("getShutterlessCorrection", &SeeCube::getShutterlessCorrection)
         .def("setRadiometricCorrection", &SeeCube::setRadiometricCorrection)
