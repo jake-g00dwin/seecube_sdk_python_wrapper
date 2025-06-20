@@ -109,6 +109,7 @@ def main():
     print("Image size: {}x{}\n".format(width, height))
 
     # Allocate memory for metadata.
+    sc.allocate_metadata()
 
     # Set the mapping mode to histogram.
     print("Setting mapping mode: histogram")
@@ -130,7 +131,7 @@ def main():
     flat_field_correction = device.getFFC()
     column_destriping = device.getColumnDestriping()
     # TODO: get vector bindings setup.
-    defective_pixels_correction =
+    defective_pixels_correction = 
     device.getDefectivePixelsCorrection(defective_pixels_list)
 
     # Allocate memory for images.
@@ -144,6 +145,9 @@ def main():
     # Configure video saving and JPEG compression.
 
     # PUT WHILE LOOP HERE!
+
+    # Free all memory that was allocated for the program.
+    sc.delete_metadata()
 
     exit(0)
 
