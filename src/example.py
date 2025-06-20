@@ -130,9 +130,27 @@ def main():
     print("Getting image processing status...")
     flat_field_correction = device.getFFC()
     column_destriping = device.getColumnDestriping()
+
     # TODO: get vector bindings setup.
-    defective_pixels_correction = 
-    device.getDefectivePixelsCorrection(defective_pixels_list)
+    defective_pixels_correction = device.getDefectivePixelsCorrectionStatus()
+    defective_pixels = None
+    if(defective_pixels_correction):
+        print("Defective pixel correction: Enabled")
+        defective_pixels = device.getDefectivePixelsCorrection()
+    else:
+        print("Defective pixel correction: Disabled")
+
+    """
+    if(printDefectivePixels):
+        for pixel in defective_pixels:
+            print("Defective pixel at ({}, {})\n".format(pixel.x pixel.y))
+    """
+
+    # Gather data on correction and filtering settings.
+    shutterlessCorrection = device.getShutterlessCorrection()
+    radiometricCorrection = device.getRadiometricCorrection()
+    temporalFiltering = device.getTemporalFiltering()
+
 
     # Allocate memory for images.
 
