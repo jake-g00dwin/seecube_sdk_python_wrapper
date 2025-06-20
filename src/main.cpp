@@ -17,8 +17,32 @@
 
 namespace py = pybind11;
 
-int add(int i, int j) {
-    return i + j;
+// Putting globals here that get used later and have memory allocated.
+
+// Allocate memory for metadata
+bool is_metadata_allocated;
+SeeCube::metadata thermalMetadata;
+SeeCube::metadata colorMetadata;
+
+
+void allocate_metadata(void) {
+    if(is_metadata_allocated){
+        std::cout << "Attempt to allocate already allocated memory!" << std::endl;
+        return;
+    }
+    is_metadata_allocated = true;
+    thermalMetadata.histogram = new uint32_t[(UINT16_MAX + 1) * sizeof(uint32_t)];
+    colorMetadata.histogram = new uint32_t[(UINT16_MAX + 1) * sizeof(uint32_t)];
+}
+
+//This should always be called at the end.
+void delete_metadata(void) {
+    if(!is_metadata_allocated){
+        std::cout << "Attempt to free unallocated memory!" << std::endl;
+        return; 
+    }
+    delete [] thermalMetadata.histogram;
+    delete [] colorMetadata.histogram; 
 }
 
 void test_SDKFunction(void) {
@@ -45,8 +69,9 @@ void test_SDKFunction(void) {
 
 PYBIND11_MODULE(py_seecube, handle) {
     handle.doc() = "This is the module docs.";
-    handle.def("add", &add);
     handle.def("test_SDKFunction", &test_SDKFunction);
+    handle.def("allocate_metadata", &allocate_metadata);
+    handle.def("delete_metadata", &delete_metadata);
 
     // SeeCubeSDK SECTION:
     py::class_<SeeCubeSDK> cls(handle, "SeeCubeSDK");
