@@ -5,6 +5,8 @@
 import re
 import cv2 as cv
 import numpy as np
+from pathlib import Path
+
 
 # Import the python bindings for the SeeCube SDK.
 import py_seecube as sc
@@ -123,7 +125,8 @@ def main():
 
     # Try to connect to the first device.
     # Default is handle 0 and filepath ""
-    device = sc.SeeCube(0, "./data")
+    data_path = str(Path.cwd() / "data")
+    device = sc.SeeCube(0, data_path)
 
     # If there is at least one device connected.
 
