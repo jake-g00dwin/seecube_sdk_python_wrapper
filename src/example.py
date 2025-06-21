@@ -177,7 +177,6 @@ def main():
     flat_field_correction = device.getFFC()
     column_destriping = device.getColumnDestriping()
 
-    # TODO: get vector bindings setup.
     defective_pixels_correction = device.getDefectivePixelsCorrectionStatus()
     defective_pixels = None
     if(defective_pixels_correction):
