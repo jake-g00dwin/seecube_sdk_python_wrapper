@@ -219,6 +219,8 @@ def main():
     )
     """
 
+    print("Press `q` to quit.")
+
     # Setup OpenCV loop.
     while True:
         # Check conditions for exiting or breaking out of loop.
