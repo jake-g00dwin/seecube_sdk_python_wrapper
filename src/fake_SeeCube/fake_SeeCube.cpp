@@ -1,8 +1,8 @@
 /*
- * Author: username
+ * Author: Jake G 
  * Date: 2025 
  * filename: fake_SeeCube.c
- * description: module_purpose
+ * description: For testing. 
  */
 
 #include "fake_SeeCube.h"
