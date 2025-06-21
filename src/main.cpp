@@ -7,6 +7,7 @@
 
 //Include needed pybind stuff.
 #include <pybind11/pybind11.h>
+#include <pybind11/numpy.h>
 //#include <pybind11/stl.h>
 
 // The SeeCube SDK header(s)
@@ -27,10 +28,16 @@ typedef struct {
 
 // Putting globals here that get used later and have memory allocated.
 
+
+//Global image size vars.
+size_t GBL_width = 0;
+size_t GBL_height = 0;
+
 // memory for metadata
 bool is_metadata_allocated;
 SeeCube::metadata thermalMetadata;
 SeeCube::metadata colorMetadata;
+SeeCube::metadata frameMetadata;
 
 
 // memory for images
@@ -69,6 +76,10 @@ void allocate_imagedata(size_t width, size_t height) {
         std::cout << "Attempt to allocate already allocated memory!" << std::endl;
         return;
     }
+    //Save the value in the global scope.
+    GBL_height = height;
+    GBL_width = width;
+
     uint16_t* thermalImg = new uint16_t[width * height * sizeof(uint16_t)];
     rgb* colorImg = new rgb[width * height * sizeof(rgb)];
     is_imagedata_allocated = true;
@@ -83,6 +94,25 @@ void delete_imagedata(void){
     delete [] colorImg; 
     is_imagedata_allocated = false;
 }
+
+// Function to return thermal metadata.
+
+// Function to return color metadata.
+
+// Get the latest thermal frame from the device
+// Timeout value is in milliseconds.
+// If 0 is used, returns immediately if no frame is available.
+// If -1 is used, it waits indefinitely for a new frame.
+//  - software trigger must be sent from another thread if the device is not in free run mode, this call will block until a new frame is available.
+/*
+if (device.getRawFrame((uint8_t*)thermalImg, &thermalMetadata, 250) &&
+    printMetadata && (frameCounter % 30 == 0)) {
+    print("Thermal frame metadata: {:.2f} {:d} {:d} {:d}\n", thermalMetadata.sensorTemperature,    // FPA temperature in Kelvin
+                                                             thermalMetadata.frameCounter,         // Total frames aquired by the device
+                                                             thermalMetadata.relativeTimestamp,    // Relative timestamp in milliseconds since last transfered thermal frame
+                                                             thermalMetadata.epochTimestamp);      // Absolute timestamp in milliseconds
+}
+*/
 
 
 void test_SDKFunction(void) {
@@ -107,6 +137,58 @@ void test_SDKFunction(void) {
 
 }
 
+SeeCube::metadata get_LastMetaData(void){
+    SeeCube::metadata md; 
+    
+    md.epochTimestamp = 0;
+    md.relativeTimestamp = 1;
+    md.frameCounter = 1;
+    md.histogram = nullptr;
+    md.sensorTemperature = 0.5;
+
+    return md;
+}
+
+py::array_t<uint16_t, py::array::c_style> get_TestFrame(size_t width, size_t height){
+
+    ssize_t size = width * height;
+    uint16_t *rawFrame = new uint16_t[size];
+
+    //Populate with striped data.
+    for(uint16_t i = 0; i < size; i++){
+        if(i % 2 == 0){
+            rawFrame[i] = 0;
+        }
+        else{
+            rawFrame[i] = UINT16_MAX;
+        }
+    }
+ 
+    std::vector<ssize_t> shape = {(ssize_t)height, (ssize_t)width};
+    std::vector<ssize_t> strides = {
+        static_cast<ssize_t>(width * sizeof(uint16_t)),
+        sizeof(uint16_t)
+    };
+
+    // 250 is the timout value in ms.
+    //self.getRawFrame((uint8_t *)rawFrame, &thermalMetadata, 250); 
+    py::capsule free_when_done(rawFrame, [](void *f){
+        uint16_t *rawFrame = reinterpret_cast<uint16_t*>(f);
+        delete[] rawFrame;        
+    });
+
+    return py::array_t<uint16_t, py::array::c_style>(
+        shape,
+        strides, 
+        rawFrame,
+        free_when_done
+    );
+}
+
+
+py::array_t<uint16_t, py::array::c_style> get_RawFrame(){
+
+
 PYBIND11_MODULE(py_seecube, handle) {
     handle.doc() = "This is the module docs.";
     handle.def("test_SDKFunction", &test_SDKFunction);
@@ -114,6 +196,9 @@ PYBIND11_MODULE(py_seecube, handle) {
     handle.def("delete_metadata", &delete_metadata);
     handle.def("allocate_imagedata", &allocate_imagedata);
     handle.def("delete_imagedata", &delete_imagedata);
+    //handle.def("get_rawimg", &get_rawimg);
+    handle.def("get_TestFrame", &get_TestFrame); 
+    handle.def("get_LastMetaData", &get_LastMetaData);
 
     // SeeCubeSDK SECTION:
     py::class_<SeeCubeSDK> cls(handle, "SeeCubeSDK");
@@ -175,13 +260,42 @@ PYBIND11_MODULE(py_seecube, handle) {
                 }) 
         .def("getDeviceFrameRate", &SeeCube::getDeviceFrameRate)
         .def("setDeviceFrameRate", &SeeCube::setDeviceFrameRate)
-        .def("getImageSize", &SeeCube::getImageSize)
+        //.def("getImageSize", &SeeCube::getImageSize)
         .def("getImageSize", [](SeeCube &self) {
-                size_t width, height;
-                self.getImageSize(width, height); 
-                return std::make_tuple(width, height);
+                self.getImageSize(GBL_width, GBL_height); 
+                return std::make_tuple(GBL_width, GBL_height);
                 })
-        .def("getRawFrame", &SeeCube::getRawFrame)
+        //.def("getRawFrame", &SeeCube::getRawFrame)
+        .def("getRawFrame", [](SeeCube &self) {
+
+            ssize_t size = GBL_width * GBL_height;
+            uint16_t *rawFrame = new uint16_t[size];
+
+            //Get the data from the camera.
+            if(!self.getRawFrame((uint8_t*)rawFrame, &thermalMetadata, 250)) {
+                std::cout << "No new frame received!" << std::endl;
+            }
+         
+            std::vector<ssize_t> shape = {(ssize_t)GBL_height, (ssize_t)GBL_width};
+            std::vector<ssize_t> strides = {
+                static_cast<ssize_t>(GBL_width * sizeof(uint16_t)),
+                sizeof(uint16_t)
+            };
+
+            // 250 is the timout value in ms.
+            //self.getRawFrame((uint8_t *)rawFrame, &thermalMetadata, 250); 
+            py::capsule free_when_done(rawFrame, [](void *f){
+                uint16_t *rawFrame = reinterpret_cast<uint16_t*>(f);
+                delete[] rawFrame;        
+            });
+
+            return py::array_t<uint16_t, py::array::c_style>(
+                shape,
+                strides, 
+                rawFrame,
+                free_when_done
+            );
+        })
         .def("getColorFrame", &SeeCube::getColorFrame)
         .def("getProcessingFrameRate", &SeeCube::getProcessingFrameRate)
         .def("setProcessingFrameRate", &SeeCube::setProcessingFrameRate)
