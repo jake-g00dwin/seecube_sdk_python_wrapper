@@ -13,7 +13,7 @@ set(SHARED_SDK_PATH "")
 # Uncomment one of these below to target devices with those serial numbers.
 
 set(SDK_SERIAL "E6D25080001_N1225140005_E3x25110003")
-#set(SDK_SERIAL "E6D2523002")
+#set(SDK_SERIAL "E6D25230002")
 
 
 message("\n\nWARNING! This build's shared libraries only support specific hardware!")
