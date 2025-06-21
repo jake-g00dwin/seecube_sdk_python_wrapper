@@ -182,7 +182,7 @@ def main():
     defective_pixels = None
     if(defective_pixels_correction):
         print("Defective pixel correction: Enabled")
-        (result, defective_pixels) = device.getDefectivePixelsCorrection()
+        result, defective_pixels = device.getDefectivePixelsCorrection()
     else:
         print("Defective pixel correction: Disabled")
 
