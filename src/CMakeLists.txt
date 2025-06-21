@@ -70,3 +70,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${MY_SHARED_LIB})
 
 
 
+add_subdirectory(fake_SeeCube)
