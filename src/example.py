@@ -16,12 +16,17 @@ width = 0
 height = 0
 NUMPIXELS = 0
 
+# Meant to hold a matrix for the image data.
+mat_img = None
+
 Bybass_Checks = True
 
 printDefectivePixels = False
 printMetadata = False
 printSensorTemperature = False
 printTargetTemperature = False
+
+clahe = cv.createCLAHE(5, (5, 5))
 
 
 def exract_project_version(file_path):
@@ -200,9 +205,11 @@ def main():
 
     # Create OpenCV window for viewing images.
     cv.namedWindow("Thermal frame", cv.WINDOW_NORMAL | cv.WINDOW_KEEPRATIO)
+    cv.resizeWindow("Thermal frame", width, height)
 
     # Create OpenCV window for viewing color images.
     cv.namedWindow("Color frame", cv.WINDOW_NORMAL | cv.WINDOW_KEEPRATIO)
+    cv.resizeWindow("Color frame", width, height)
 
     cv.createTrackbar(
         "Brightness", "Brightness/Contrast", 255, 2 * 255, BrightnessContrast
@@ -221,9 +228,23 @@ def main():
             break
 
         # Get the current image data.
-        thermal_img = np.zeros(NUMPIXELS, dtype=np.uint16)
-        color_img = np.zeros(NUMPIXELS, dtype=np.uint16)
+        thermal_img = sc.getRawFrame()
 
+        img8 = cv.normalize(
+                thermal_img,
+                None,
+                0,
+                255,
+                cv.NORM_MINMAX).astype(np.uint8)
+
+        img8 = np.uint8(img8)
+
+        adj = clahe.apply(img8)
+        adj = cv.cvtColor(adj, cv.COLOR_GRAY2BGR)
+
+        color_img = cv.applyColorMap(adj, cv.COLORMAP_INFERNO)
+
+        # Update the image for each window.
         cv.imshow("Thermal frame", thermal_img)
         cv.imshow("Color frame", color_img)
 
