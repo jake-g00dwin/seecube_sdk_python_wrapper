@@ -208,6 +208,7 @@ def main():
     cv.namedWindow("Color frame", cv.WINDOW_NORMAL | cv.WINDOW_KEEPRATIO)
     cv.resizeWindow("Color frame", width, height)
 
+    """
     cv.createTrackbar(
         "Brightness", "Brightness/Contrast", 255, 2 * 255, BrightnessContrast
     )
@@ -216,6 +217,7 @@ def main():
     cv.createTrackbar(
         "Contrast", "Brightness/Contrast", 127, 2 * 127, BrightnessContrast
     )
+    """
 
     # Setup OpenCV loop.
     while True:
