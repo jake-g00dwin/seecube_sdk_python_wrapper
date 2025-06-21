@@ -15,13 +15,12 @@ set(SHARED_SDK_PATH "")
 set(SDK_SERIAL "E6D25080001_N1225140005_E3x25110003")
 #set(SDK_SERIAL "E6D25230002")
 
-
 message("\n\nWARNING! This build's shared libraries only support specific hardware!")
 message("Please ensure your device's serial number is listed:")
 message("Serial Numbers: ${SDK_SERIAL}\n\n")
 
 # Determine the correct shared library to link
-if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux" AND (NOT UNIT_TESTING))
     # If the system is a linux based system then it coulb be x86 or arm
 
     find_package(PkgConfig REQUIRED)
@@ -49,7 +48,7 @@ if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
         set(MY_SHARED_LIB "${CMAKE_SOURCE_DIR}/src/linux_arm/${SDK_SERIAL}/libSeeCube.so")
     endif()
 # For windows based systems, there is only one sdk.
-elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows" AND (NOT UNIT_TESTING))
     message("\n\n##############################")
     message("Setting windows lib")
     message("##############################\n\n")
@@ -67,7 +66,10 @@ message("Shared library path: ${MY_SHARED_LIB}")
 # Link with the correct shared library from the SDK.
 target_link_libraries(${PROJECT_NAME} PRIVATE ${MY_SHARED_LIB})
 
-
-
-
+# Use the fake sdk for testing.
 add_subdirectory(fake_SeeCube)
+if(UNIT_TESTING)
+    target_link_libraries(${PROJECT_NAME}
+        fake_SeeCube    
+    )
+endif()
