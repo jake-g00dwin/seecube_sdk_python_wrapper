@@ -236,7 +236,8 @@ PYBIND11_MODULE(py_seecube, handle) {
         .value("auomatic", SeeCube::mapping::automatic)
         .value("manual", SeeCube::mapping::manual)
         .value("histEq", SeeCube::mapping::histEq)
-        .value("adaptive", SeeCube::mapping::adaptive);
+        .value("adaptive", SeeCube::mapping::adaptive)
+        .export_values();
 
 
     py::class_<SeeCube::metadata>(sc_cls, "metadata")
