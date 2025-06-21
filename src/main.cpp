@@ -318,9 +318,7 @@ PYBIND11_MODULE(py_seecube, handle) {
                     bool result = self.getDefectivePixelsCorrection(defective_pixels);
                     return py::make_tuple(result, defective_pixels);
                 })
-        //.def("getDefectivePixelsCorrection",
-        //        static_cast<bool (SeeCube::*)(std::vector<std::pair<int, int>>&)>(&SeeCube::getDefectivePixelsCorrection),
-        //        py::arg("pDefectivePixelsList"))
+
         .def("setShutterlessCorrection", &SeeCube::setShutterlessCorrection)
         .def("getShutterlessCorrection", &SeeCube::getShutterlessCorrection)
         .def("setRadiometricCorrection", &SeeCube::setRadiometricCorrection)
