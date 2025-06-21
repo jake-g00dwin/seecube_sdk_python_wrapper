@@ -21,8 +21,6 @@ NUMPIXELS = 0
 # Meant to hold a matrix for the image data.
 mat_img = None
 
-Bybass_Checks = True
-
 printDefectivePixels = False
 printMetadata = False
 printSensorTemperature = False
@@ -134,7 +132,7 @@ def main():
     print("Attempting connection to device...")
 
     # Check if the device connection was sucessful.
-    if(not sc_sdk.isConnected() and not Bybass_Checks):
+    if(not sc_sdk.isConnected(0)):
         print("Error: Failed to connect to device!\n")
         print("Exiting...")
         exit(1)
