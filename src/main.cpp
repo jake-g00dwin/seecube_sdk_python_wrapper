@@ -16,7 +16,7 @@
 #include <string>
 #include <iostream>
 
-#include <sys/types.h>
+//#include <sys/types.h>
 
 namespace py = pybind11;
 
@@ -153,7 +153,7 @@ SeeCube::metadata get_LastMetaData(void){
 
 py::array_t<uint16_t, py::array::c_style> get_TestFrame(size_t width, size_t height){
 
-    ssize_t size = width * height;
+    std::ptrdiff_t size = width * height;
     uint16_t *rawFrame = new uint16_t[size];
 
     //Populate with striped data.
@@ -166,9 +166,9 @@ py::array_t<uint16_t, py::array::c_style> get_TestFrame(size_t width, size_t hei
         }
     }
  
-    std::vector<ssize_t> shape = {(ssize_t)height, (ssize_t)width};
-    std::vector<ssize_t> strides = {
-        static_cast<ssize_t>(width * sizeof(uint16_t)),
+    std::vector<std::ptrdiff_t> shape = {(std::ptrdiff_t)height, (std::ptrdiff_t)width};
+    std::vector<std::ptrdiff_t> strides = {
+        static_cast<std::ptrdiff_t>(width * sizeof(uint16_t)),
         sizeof(uint16_t)
     };
 
@@ -186,9 +186,6 @@ py::array_t<uint16_t, py::array::c_style> get_TestFrame(size_t width, size_t hei
         free_when_done
     );
 }
-
-
-py::array_t<uint16_t, py::array::c_style> get_RawFrame(){
 
 
 PYBIND11_MODULE(py_seecube, handle) {
@@ -270,7 +267,7 @@ PYBIND11_MODULE(py_seecube, handle) {
         //.def("getRawFrame", &SeeCube::getRawFrame)
         .def("getRawFrame", [](SeeCube &self) {
 
-            ssize_t size = GBL_width * GBL_height;
+            std::ptrdiff_t size = GBL_width * GBL_height;
             uint16_t *rawFrame = new uint16_t[size];
 
             //Get the data from the camera.
@@ -278,9 +275,9 @@ PYBIND11_MODULE(py_seecube, handle) {
                 std::cout << "No new frame received!" << std::endl;
             }
          
-            std::vector<ssize_t> shape = {(ssize_t)GBL_height, (ssize_t)GBL_width};
-            std::vector<ssize_t> strides = {
-                static_cast<ssize_t>(GBL_width * sizeof(uint16_t)),
+            std::vector<std::ptrdiff_t> shape = {(std::ptrdiff_t)GBL_height, (std::ptrdiff_t)GBL_width};
+            std::vector<std::ptrdiff_t> strides = {
+                static_cast<std::ptrdiff_t>(GBL_width * sizeof(uint16_t)),
                 sizeof(uint16_t)
             };
 
