@@ -16,7 +16,6 @@ import py_seecube as sc
 # These are set during the main function.
 width = 0
 height = 0
-NUMPIXELS = 0
 
 # Meant to hold a matrix for the image data.
 mat_img = None
@@ -156,7 +155,6 @@ def main():
     # Get the image size.
     width, height = device.getImageSize()
     print("Image size: {}x{}\n".format(width, height))
-    NUMPIXELS = width * height
 
     # Allocate memory for metadata.
     sc.allocate_metadata()
