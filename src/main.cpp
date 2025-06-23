@@ -58,6 +58,7 @@ void allocate_metadata(void) {
         return;
     }
     is_metadata_allocated = true;
+    //This feels...wrong.
     thermalMetadata.histogram = new uint32_t[(UINT16_MAX + 1) * sizeof(uint32_t)];
     colorMetadata.histogram = new uint32_t[(UINT16_MAX + 1) * sizeof(uint32_t)];
 }
@@ -82,6 +83,7 @@ void allocate_imagedata(size_t width, size_t height) {
     GBL_height = height;
     GBL_width = width;
 
+    //This also feels wrong...it follows the example from the manufacturer howevew.
     uint16_t* thermalImg = new uint16_t[width * height * sizeof(uint16_t)];
     rgb* colorImg = new rgb[width * height * sizeof(rgb)];
     is_imagedata_allocated = true;
