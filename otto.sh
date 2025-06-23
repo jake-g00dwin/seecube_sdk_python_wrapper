@@ -10,6 +10,21 @@ TEMPLATE_FILES=".template_files"
 MODULE_DIR="${TEMPLATE_FILES}/modules"
 PROJECT_NAME="py_seecube"
 
+CMAKE_EXTRA_DEFINES=""
+
+# Compilers that I use for newer standlibs
+USE_ALT_COMPILERS=false
+ALT_CXX_COMPILER="/usr/bin/clang++-19"
+ALT_C_COMPILER="/usr/bin/clang-19"
+
+
+update_cmake_extra () {
+    if [ "${USE_ALT_COMPILERS}" = true ]; then
+        CMAKE_EXTRA_DEFINES="${CMAKE_EXTRA_DEFINES} -DCMAKE_CXX_COMPILER=${ALT_CXX_COMPILER}"
+        CMAKE_EXTRA_DEFINES="${CMAKE_EXTRA_DEFINES} -DCMAKE_C_COMPILER=${ALT_C_COMPILER}"
+        echo "Cmake extra defines: ${CMAKE_EXTRA_DEFINES}"
+    fi
+}
 
 format_source_code () {
     #Get a list of all C files
@@ -178,22 +193,22 @@ cross_compile () {
 
 build_release() {
     clear_cmake_cache 
-    cmake -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ../ 
+    cmake -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ${CMAKE_EXTRA_DEFINES} ../ 
     make 
 }
 
 build_main () {
     clear_cmake_cache
     
-    cmake -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ../
+    cmake -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ${CMAKE_EXTRA_DEFINES} ../
     make ${PROJECT_NAME}
 }
 
 run_c_tests () {
     format_source_code 
     clear_cmake_cache
-    cmake -DUNIT_TESTING=ON  -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ../
-    make AllTests && ./tests/AllTests
+    cmake -DUNIT_TESTING=ON  -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE} ${CMAKE_EXTRA_DEFINES} ../
+    make AllTests && ./tests/AllTests -v -c
 }
 
 print_menu () {
@@ -210,6 +225,7 @@ print_menu () {
 
 main() {
     add_compile_commands 
+    update_cmake_extra
     valid_choice=false
     
     while [ "$valid_choice" != true ]; do
