@@ -17,13 +17,20 @@ int add_two(int a)
 }
 
 
-int FakeSeeCube_DeviceCount = 0;
+int FakeSeeCube_DeviceCount;
 std::string device_name = "";
+bool is_connected = false;
 
 
 void set_FakeSeeCubeDeviceCount(int count)
 {
     FakeSeeCube_DeviceCount = count;
+}
+
+
+void fakeSeeCube_setCameraConnectionState( bool set_connected)
+{
+    is_connected = set_connected;
 }
 
 /**
@@ -59,10 +66,16 @@ int SeeCubeSDK::getDeviceCount()
 std::string SeeCubeSDK::getDeviceName(const int& pHandle)
 {
     if(FakeSeeCube_DeviceCount == 0){
-        device_name = "device_name";
+        device_name = "undefined"; 
     }
     else{
-       device_name = "undefined"; 
+        device_name = "device_name";
     }
     return device_name;
+}
+
+
+bool SeeCubeSDK::isConnected(const int& pHandle)
+{
+    return is_connected;
 }

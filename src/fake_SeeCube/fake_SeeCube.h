@@ -20,5 +20,6 @@
 int  add_two(int a);
 
 void set_FakeSeeCubeDeviceCount(int count);
+void fakeSeeCube_setCameraConnectionState(bool set_connected);
 
 #endif // FAKE_SEECUBE
