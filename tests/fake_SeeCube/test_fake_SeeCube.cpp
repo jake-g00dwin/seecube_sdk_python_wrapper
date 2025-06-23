@@ -20,9 +20,11 @@ extern "C"
 
 TEST_GROUP(test_fakeSeeCube)
 {
+    SeeCubeSDK sc_sdk;
     void setup()
     {
-
+        //Declareing an instance of the SeeCubeSDK class as sc_sdk
+        SeeCubeSDK sc_sdk(SeeCubeSDK::verbosityLevel::info, 1);
     }
     void teardown()
     {
@@ -31,8 +33,12 @@ TEST_GROUP(test_fakeSeeCube)
 };
 
 
-TEST(test_fakeSeeCube, InstanceOfSeeCubeSDKWorks)
+TEST(test_fakeSeeCube, SCSDK_GetsInstanceValue)
 {
-    //Declareing an instance of the SeeCubeSDK class as sc_sdk
-    SeeCubeSDK sc_sdk(SeeCubeSDK::verbosityLevel::info, 4);
+    set_FakeSeeCubeDeviceCount(0);
+    CHECK_EQUAL(0, sc_sdk.getDeviceCount());
+
+    set_FakeSeeCubeDeviceCount(1);
+    CHECK_EQUAL(1, sc_sdk.getDeviceCount());
 }
+
