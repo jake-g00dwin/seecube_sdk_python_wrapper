@@ -17,6 +17,8 @@
 
 #include "SeeCube_SDK_user.h"
 
-int add_two(int a);
+int  add_two(int a);
+
+void set_FakeSeeCubeDeviceCount(int count);
 
 #endif // FAKE_SEECUBE

@@ -17,6 +17,14 @@ int add_two(int a)
 }
 
 
+int FakeSeeCube_DeviceCount = 0;
+
+
+void set_FakeSeeCubeDeviceCount(int count)
+{
+    FakeSeeCube_DeviceCount = count;
+}
+
 /**
 * @brief Constructor for the SeeCubeSDK class.
 *
@@ -40,3 +48,10 @@ SeeCubeSDK::~SeeCubeSDK(void)
 {
     std::cout << "Destructor Called!" << std::endl;
 }
+
+int SeeCubeSDK::getDeviceCount()
+{
+    return FakeSeeCube_DeviceCount;
+}
+
+
