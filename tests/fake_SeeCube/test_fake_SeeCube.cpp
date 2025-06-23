@@ -5,14 +5,20 @@
  * description: module_purpose
  */
 
+
+//The include for <map> causes issues, likely due to the memory leak detection
+//that is part of the cpputest framework.
+#include "fake_SeeCube.h"
+
+
 #include "CppUTest/CommandLineTestRunner.h"
 
 extern "C" 
 {
-#include "fake_SeeCube.h"
+    //#include "fake_SeeCube.h"
 }
 
-TEST_GROUP(FirstTestGroup)
+TEST_GROUP(test_fakeSeeCube)
 {
     void setup()
     {
@@ -24,15 +30,9 @@ TEST_GROUP(FirstTestGroup)
     }
 };
 
-TEST(FirstTestGroup, FirstTest)
-{
-   FAIL("Fail me!");
-}
 
-TEST(FirstTestGroup, SecondTest)
+TEST(test_fakeSeeCube, InstanceOfSeeCubeSDKWorks)
 {
-   STRCMP_EQUAL("hello", "world");
-   LONGS_EQUAL(1, 2);
-   CHECK(false);
+    //Declareing an instance of the SeeCubeSDK class as sc_sdk
+    SeeCubeSDK sc_sdk(SeeCubeSDK::verbosityLevel::info, 4);
 }
-

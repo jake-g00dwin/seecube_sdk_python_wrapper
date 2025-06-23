@@ -13,6 +13,6 @@ target_link_libraries(AllTests
     ${CPPUTEST_LIBRARIES}/libCppUTest.a
     ${CPPUTEST_LIBRARIES}/libCppUTestExt.a
     # TEST_LINKS
-	fake_SeeCube
+	test_fake_SeeCube
     simple_test
 )

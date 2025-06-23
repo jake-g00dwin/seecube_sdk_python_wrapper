@@ -3,6 +3,7 @@
 
 //ImportTestGroups
 IMPORT_TEST_GROUP(simple_test);
+IMPORT_TEST_GROUP(test_fakeSeeCube);
 
 //START: main
 int main(int argc, char** argv)
