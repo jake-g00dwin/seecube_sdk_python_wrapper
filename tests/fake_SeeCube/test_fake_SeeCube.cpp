@@ -13,6 +13,8 @@
 
 #include "CppUTest/CommandLineTestRunner.h"
 
+#include <iostream>
+
 extern "C" 
 {
     //#include "fake_SeeCube.h"
@@ -42,6 +44,8 @@ TEST(test_fakeSeeCube, SCSDK_GetsDeviceCount)
     CHECK_EQUAL(1, sc_sdk.getDeviceCount());
 }
 
+
+
 TEST(test_fakeSeeCube, SCSDK_GetDeviceNameWhenOneDevice)
 {
     set_FakeSeeCubeDeviceCount(1);
@@ -56,9 +60,23 @@ TEST(test_fakeSeeCube, SCSDK_GetDeviceNameWhenOneDevice)
 TEST(test_fakeSeeCube, SCSDK_GetDeviceNameWhenNoDevice)
 {
     set_FakeSeeCubeDeviceCount(0);
-    std::string expected_name = "undefined";
+    std::string expected_name{"undefined"};
     std::string device_name = sc_sdk.getDeviceName();
+   
+    int result = expected_name.compare(device_name);
+
+    CHECK_EQUAL(0, result);
+}
+
+TEST(test_fakeSeeCube, SCSDK_isConnectedReturnsFalseWhenFlagUnset)
+{
+    fakeSeeCube_setCameraConnectionState(false);
+    CHECK_FALSE(sc_sdk.isConnected()); 
+}
 
 
-    CHECK_TRUE(device_name.compare(expected_name) == 0);
+TEST(test_fakeSeeCube, SCSDK_isConnectedReturnsTrueWhenFlagSet)
+{
+    fakeSeeCube_setCameraConnectionState(true);
+    CHECK_TRUE(sc_sdk.isConnected()); 
 }
