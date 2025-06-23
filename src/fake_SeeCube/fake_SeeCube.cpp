@@ -18,6 +18,7 @@ int add_two(int a)
 
 
 int FakeSeeCube_DeviceCount = 0;
+std::string device_name = "";
 
 
 void set_FakeSeeCubeDeviceCount(int count)
@@ -40,13 +41,13 @@ void set_FakeSeeCubeDeviceCount(int count)
 SeeCubeSDK::SeeCubeSDK(const verbosityLevel& pVerbosity,
            const int& pThreadPoolSize)
 {
-    std::cout << "Constructor Called!" << std::endl;
+    //std::cout << "Constructor Called!" << std::endl;
 }
 
 
 SeeCubeSDK::~SeeCubeSDK(void)
 {
-    std::cout << "Destructor Called!" << std::endl;
+    //std::cout << "Destructor Called!" << std::endl;
 }
 
 int SeeCubeSDK::getDeviceCount()
@@ -55,3 +56,13 @@ int SeeCubeSDK::getDeviceCount()
 }
 
 
+std::string SeeCubeSDK::getDeviceName(const int& pHandle)
+{
+    if(FakeSeeCube_DeviceCount == 0){
+        device_name = "device_name";
+    }
+    else{
+       device_name = "undefined"; 
+    }
+    return device_name;
+}
