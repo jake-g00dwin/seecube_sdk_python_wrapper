@@ -79,3 +79,9 @@ bool SeeCubeSDK::isConnected(const int& pHandle)
 {
     return is_connected;
 }
+
+
+void SeeCubeSDK::parseCoreParameter(const std::string& pParameter)
+{
+    //Do nothing for now.
+}
