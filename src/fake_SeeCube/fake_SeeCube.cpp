@@ -8,6 +8,14 @@
 #include "fake_SeeCube.h"
 #include <iostream>
 
+/*
+ *################################
+ * SECTION
+ *################################
+ */
+
+
+
 // dumb test function
 int add_two(int a)
 {
@@ -32,6 +40,13 @@ void fakeSeeCube_setCameraConnectionState( bool set_connected)
 {
     is_connected = set_connected;
 }
+
+
+/*
+ *################################
+ * SeeCubeSDK 
+ *################################
+ */
 
 /**
 * @brief Constructor for the SeeCubeSDK class.
@@ -85,3 +100,24 @@ void SeeCubeSDK::parseCoreParameter(const std::string& pParameter)
 {
     //Do nothing for now.
 }
+
+
+
+/*
+ *################################
+ * SeeCube Class Definitions 
+ *################################
+ */
+
+SeeCube::SeeCube(const int& pHandle,const std::string& mSensorDataPath)
+{
+   //Nothing.
+}
+
+std::string SeeCube::getPartNumber(void)
+{
+    std::string part_number{"XXXXXXXXXX"};
+    return part_number;
+}
+
+
