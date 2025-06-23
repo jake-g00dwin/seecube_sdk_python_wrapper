@@ -33,7 +33,7 @@ TEST_GROUP(test_fakeSeeCube)
 };
 
 
-TEST(test_fakeSeeCube, SCSDK_GetsInstanceValue)
+TEST(test_fakeSeeCube, SCSDK_GetsDeviceCount)
 {
     set_FakeSeeCubeDeviceCount(0);
     CHECK_EQUAL(0, sc_sdk.getDeviceCount());
@@ -42,3 +42,23 @@ TEST(test_fakeSeeCube, SCSDK_GetsInstanceValue)
     CHECK_EQUAL(1, sc_sdk.getDeviceCount());
 }
 
+TEST(test_fakeSeeCube, SCSDK_GetDeviceNameWhenOneDevice)
+{
+    set_FakeSeeCubeDeviceCount(1);
+    std::string expected_name = "device_name";
+    std::string device_name = sc_sdk.getDeviceName();
+
+
+    CHECK_TRUE(device_name.compare(expected_name) == 0);
+}
+
+
+TEST(test_fakeSeeCube, SCSDK_GetDeviceNameWhenNoDevice)
+{
+    set_FakeSeeCubeDeviceCount(0);
+    std::string expected_name = "undefined";
+    std::string device_name = sc_sdk.getDeviceName();
+
+
+    CHECK_TRUE(device_name.compare(expected_name) == 0);
+}
