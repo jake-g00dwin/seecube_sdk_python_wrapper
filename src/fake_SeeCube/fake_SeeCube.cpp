@@ -7,6 +7,7 @@
 
 #include "fake_SeeCube.h"
 #include <iostream>
+#include <cstring>
 
 /*
  *################################
@@ -22,7 +23,7 @@ bool is_connected = false;
 float device_framerate = 60.0;
 
 bool fake_imagesize_return = false;
-
+bool fake_rawimage_return = false;
 
 void set_FakeSeeCubeDeviceCount(int count)
 {
@@ -39,6 +40,12 @@ void fakeSeeCube_setCameraConnectionState( bool set_connected)
 void fakeSeeCube_setImageSizeReturnValue(bool value)
 {
     fake_imagesize_return = value;
+}
+
+
+void fakeSeeCube_setRawImageReturnBool(bool value)
+{
+    fake_rawimage_return = value;
 }
 
 
@@ -171,4 +178,16 @@ bool SeeCube::getImageSize(size_t& pWidth, size_t& pHeight)
     pHeight = fake_height_default;
     return fake_imagesize_return;
 }
+
+
+bool SeeCube::getRawFrame(unsigned char* pData,
+        metadata* pMetadata, 
+        const int32_t& pTimeout)
+{
+    //We want zero out the memory before we send it back.
+    std::memset(pData, 0, sizeof(uint16_t) * (fake_height_default * fake_width_default));    
+
+    return fake_rawimage_return;
+}
+
 
