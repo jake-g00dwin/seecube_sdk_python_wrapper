@@ -11,7 +11,12 @@
 #include <pybind11/numpy.h>
 
 // The SeeCube SDK header(s)
-#include <SeeCube_SDK_user.h>
+#define UNIT_TESTING 1
+#ifdef UNIT_TESTING
+    #include "fake_SeeCube.h"
+#else
+    #include <SeeCube_SDK_user.h>
+#endif
 
 #include <string>
 #include <iostream>
@@ -201,6 +206,16 @@ PYBIND11_MODULE(py_seecube, handle) {
     handle.def("get_TestFrame", &get_TestFrame); 
     handle.def("get_LastMetaData", &get_LastMetaData);
 
+    // Testing Functionality, used with Fake of classes.
+#ifdef UNIT_TESTING
+    handle.def("set_FakeSeeCubeDeviceCount", &set_FakeSeeCubeDeviceCount);
+    handle.def("fakeSeeCube_setCameraConnectionState", &fakeSeeCube_setCameraConnectionState);
+    handle.def("fakeSeeCube_setImageSizeReturnValue", &fakeSeeCube_setImageSizeReturnValue);
+    handle.def("fakeSeeCube_setRawImageReturnBool", &fakeSeeCube_setRawImageReturnBool);
+    handle.def("spy_is_pixelcorrection", &spy_is_pixelcorrection);
+#endif
+
+
     // SeeCubeSDK SECTION:
     py::class_<SeeCubeSDK> cls(handle, "SeeCubeSDK");
 
@@ -325,7 +340,10 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def("getRadiometricCorrection", &SeeCube::getRadiometricCorrection)
         .def("getSensorTemperature", &SeeCube::getSensorTemperature)
         .def("getPixelTemperature", &SeeCube::getPixelTemperature)
-        .def("setMappingMode", &SeeCube::setMappingMode)
+        .def("setMappingMode", &SeeCube::setMappingMode,
+                py::arg("mapping"),
+                py::arg("pFirstParam") = -1.0f,
+                py::arg("pSecondParam") = -1.0f)
         .def("getMappingMode", &SeeCube::getMappingMode)
         .def("setColumnDestriping", &SeeCube::setColumnDestriping)
         .def("getColumnDestriping", &SeeCube::getColumnDestriping)
