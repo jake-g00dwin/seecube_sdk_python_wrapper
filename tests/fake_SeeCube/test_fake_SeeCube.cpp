@@ -24,15 +24,20 @@ TEST_GROUP(test_fakeSeeCube)
 {
     SeeCubeSDK sc_sdk;
     SeeCube device;
+
+    size_t num_elements = fake_width_default * fake_height_default;
+    uint16_t *raw_img;
+    
     void setup()
     {
         //Declareing an instance of the SeeCubeSDK class as sc_sdk
         SeeCubeSDK sc_sdk(SeeCubeSDK::verbosityLevel::info, 1);
         SeeCube device(0, "./data");
+        raw_img = new uint16_t[num_elements];
     }
     void teardown()
     {
-
+        delete [] raw_img;
     }
 };
 
@@ -134,6 +139,21 @@ TEST(test_fakeSeeCube, SC_getImageSizeReturnsFalseWhenUnset)
     CHECK_EQUAL(fake_height_default, height);
 }
 
+TEST(test_fakeSeeCube, SC_getRawImageSucessOnSetTrue)
+{
+    fakeSeeCube_setRawImageReturnBool(true); 
+    
+    //Initialize the memory to be all the same value. 
+    for(unsigned int i = 0; i < num_elements; i++){
+        raw_img[i] = 128;
+    }
 
+    //Expect that the fake camera sets all of them to zero.
+    bool result = device.getRawFrame((uint8_t*)raw_img);
 
+    CHECK_TRUE(result);
 
+    for(unsigned int i = 0; i < num_elements; i++){
+        CHECK_EQUAL(0, raw_img[i]);
+    }
+}
