@@ -191,3 +191,18 @@ bool SeeCube::getRawFrame(unsigned char* pData,
 }
 
 
+bool SeeCube::getDefectivePixelsCorrection(void)
+{
+    return true;
+}
+
+
+bool SeeCube::getDefectivePixelsCorrection(
+        std::vector<std::pair<int, int>>& pDefectivePixelsList)
+{
+    pDefectivePixelsList.push_back({255, 255});
+    return true;
+}
+
+
+
