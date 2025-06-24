@@ -114,10 +114,26 @@ TEST(test_fakeSeeCube, SC_setInvalidFPSReturnsFalse)
 
 TEST(test_fakeSeeCube, SC_getImageSizeReturnsTrue)
 {
-    size_t width = 1920;
-    size_t height = 1080;
+    fakeSeeCube_setImageSizeReturnValue(true);
+    size_t width; 
+    size_t height;
     bool result = device.getImageSize(width, height);
     CHECK_TRUE(result);
+    CHECK_EQUAL(fake_width_default, width);
+    CHECK_EQUAL(fake_height_default, height);
 }
+
+TEST(test_fakeSeeCube, SC_getImageSizeReturnsFalseWhenUnset)
+{
+    fakeSeeCube_setImageSizeReturnValue(false);
+    size_t width; 
+    size_t height;
+    bool result = device.getImageSize(width, height);
+    CHECK_FALSE(result);
+    CHECK_EQUAL(fake_width_default, width);
+    CHECK_EQUAL(fake_height_default, height);
+}
+
+
 
 
