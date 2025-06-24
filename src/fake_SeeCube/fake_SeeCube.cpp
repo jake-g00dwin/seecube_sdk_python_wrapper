@@ -127,14 +127,23 @@ SeeCube::~SeeCube(void)
 
 std::string SeeCube::getPartNumber(void)
 {
-    std::string part_number{"XXXXXXXXXX"};
+    std::string part_number{"FAKEPART"};
     return part_number;
 }
 
 
 std::string SeeCube::getSerialNumber(void)
 {
-    std::string part_number{"XXXXXXXXXX"};
+    std::string part_number{"FAKESERIAL"};
     return part_number;
+}
+
+
+void SeeCube::getSensorSettings(uint16_t& pTINT,
+                           uint16_t& pGFID,
+                           uint16_t& pGSK,
+                           uint16_t& pGAIN)
+{
+    //Just leaving them, stubbing the function.
 }
 
