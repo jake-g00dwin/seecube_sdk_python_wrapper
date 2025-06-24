@@ -220,7 +220,7 @@ def main():
 
     print("Press `q` to quit.")
 
-    img_shape = (width, height)
+    img_shape = (height, width)
     thermal_img = np.zeros(img_shape, np.uint16)
 
     # Setup OpenCV loop.
