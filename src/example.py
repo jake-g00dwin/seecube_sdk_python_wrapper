@@ -161,7 +161,7 @@ def main():
 
     # Set the mapping mode to histogram.
     print("Setting mapping mode: histogram")
-    device.setMappingMode(sc.SeeCube.mapping.histEq)
+    # device.setMappingMode(sc.SeeCube.mapping.histEq)
 
     # Set the color preset value to 10.
     print("Setting color preset value: 10")
