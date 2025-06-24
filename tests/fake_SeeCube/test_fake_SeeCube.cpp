@@ -95,3 +95,9 @@ TEST(test_fakeSeeCube, SC_Stubbedgetsensorsettings)
     device.getSensorSettings(a, b, c, d);
     CHECK_TRUE(true);
 }
+
+TEST(test_fakeSeeCube, SC_StubbedGetFPS)
+{
+    CHECK_EQUAL(60.0, device.getDeviceFrameRate());
+}
+
