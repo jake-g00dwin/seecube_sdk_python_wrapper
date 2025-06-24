@@ -147,3 +147,8 @@ void SeeCube::getSensorSettings(uint16_t& pTINT,
     //Just leaving them, stubbing the function.
 }
 
+
+float SeeCube::getDeviceFrameRate(void)
+{
+    return 60.0;
+}
