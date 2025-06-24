@@ -199,6 +199,80 @@ bool SeeCube::getRawFrame(unsigned char* pData,
 }
 
 
+bool SeeCube::getColorFrame(unsigned char* pData, 
+        metadata* pMetadata,
+        const int32_t& pTimeout)
+{
+    return false;
+}
+
+
+float SeeCube::getProcessingFrameRate(void)
+{
+    return 0.0;
+}
+
+
+void SeeCube::setProcessingFrameRate(const float& pFrameRate)
+{
+
+}
+
+
+void SeeCube::setFreeRun(const bool& pFreeRun)
+{
+
+}
+
+
+bool SeeCube::getFreeRun(void)
+{
+    return false;
+}
+
+
+void SeeCube::runFFC(const bool& pUseShutter,
+            const int& pFrameCount)
+{
+
+}
+
+
+void SeeCube::setFFC(const bool& pStatus)
+{
+
+}
+
+
+bool SeeCube::getFFC(void)
+{
+    return false;
+}
+
+
+void SeeCube::closeShutter(void)
+{
+
+}
+
+void SeeCube::openShutter(void)
+{
+
+}
+
+
+void SeeCube::setColorPreset(int& pPreset)
+{
+
+}
+
+int SeeCube::getColorPreset(void)
+{
+    return 0;
+}
+
+
+
 void SeeCube::setDefectivePixelsCorrection(const bool& pStatus)
 {
     is_pixelcorrection = pStatus;
@@ -216,4 +290,105 @@ bool SeeCube::getDefectivePixelsCorrection(
     pDefectivePixelsList.push_back({255, 255});
     return is_pixelcorrection;
 }
+
+
+
+void SeeCube::setShutterlessCorrection(const bool& pStatus)
+{
+
+}
+
+
+bool SeeCube::getShutterlessCorrection(void)
+{
+    return false;
+}
+
+
+void SeeCube::setRadiometricCorrection(const bool& pStatus)
+{
+
+}
+
+
+bool SeeCube::getRadiometricCorrection(void)
+{
+    return false;
+}
+
+
+float SeeCube::getSensorTemperature(void)
+{
+    return 0.0;
+}
+
+
+float SeeCube::getPixelTemperature(const int& pX,
+                          const int& pY,
+                          const float& pEmissivity)
+{
+    return 0.0;
+}
+
+
+void SeeCube::setMappingMode(const mapping& pMode,
+                    const float& pFirstParam,
+                    const float& pSecondParam)
+{
+
+}
+
+
+
+SeeCube::mapping SeeCube::getMappingMode(void)
+{
+    mapping fake_mapping;
+    return fake_mapping;
+}
+
+
+void SeeCube::setColumnDestriping(const bool& pStatus)
+{
+
+}
+
+
+
+bool SeeCube::getColumnDestriping(void)
+{
+    return false;
+}
+
+void SeeCube::setTemporalFiltering(const float& pRatio)
+{
+
+}
+
+
+float SeeCube::getTemporalFiltering(void)
+{
+    return 0.0;
+}
+
+
+void SeeCube::softwareTriggerRequest(void)
+{
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
