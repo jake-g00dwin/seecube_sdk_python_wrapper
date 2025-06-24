@@ -21,6 +21,9 @@ bool is_connected = false;
 
 float device_framerate = 60.0;
 
+bool fake_imagesize_return = false;
+
+
 void set_FakeSeeCubeDeviceCount(int count)
 {
     FakeSeeCube_DeviceCount = count;
@@ -30,6 +33,12 @@ void set_FakeSeeCubeDeviceCount(int count)
 void fakeSeeCube_setCameraConnectionState( bool set_connected)
 {
     is_connected = set_connected;
+}
+
+
+void fakeSeeCube_setImageSizeReturnValue(bool value)
+{
+    fake_imagesize_return = value;
 }
 
 
@@ -160,8 +169,6 @@ bool SeeCube::getImageSize(size_t& pWidth, size_t& pHeight)
 {
     pWidth = fake_width_default;
     pHeight = fake_height_default;
-    return true;
+    return fake_imagesize_return;
 }
-
-
 
