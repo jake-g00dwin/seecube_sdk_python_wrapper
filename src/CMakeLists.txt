@@ -12,11 +12,6 @@ PRIVATE VERSION_INFO=${EXAMPLE_VERSION_INFO})
 set(SHARED_SDK "SeeCube")
 set(SHARED_SDK_PATH "")
 
-
-add_subdirectory(fake_SeeCube)
-
-
-
 #Ensure that the correct libraries are included.
 # These libraries are what is used in the example repo.
 # Uncomment one of these below to target devices with those serial numbers.
@@ -32,6 +27,7 @@ message("Serial Numbers: ${SDK_SERIAL}\n\n")
 # First thing to check is if we are in unit testing mode.
 # If we are then we want to link the fake library for testing.
 if(UNIT_TESTING)
+    add_subdirectory(fake_SeeCube)
     message("Linking with Fake libraries for unit testing.")
     target_link_libraries(${PROJECT_NAME} PRIVATE
         fake_SeeCube    
