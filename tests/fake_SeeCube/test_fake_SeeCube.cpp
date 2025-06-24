@@ -157,3 +157,27 @@ TEST(test_fakeSeeCube, SC_getRawImageSucessOnSetTrue)
         CHECK_EQUAL(0, raw_img[i]);
     }
 }
+
+TEST(test_fakeSeeCube, SC_CheckPixelCorrectionEnabledStatus)
+{
+    bool is_enabled = device.getDefectivePixelsCorrection();
+    CHECK_TRUE(is_enabled);
+}
+
+TEST(test_fakeSeeCube, SC_CheckPixelCorrectionAcceptsOverload)
+{
+    std::vector<std::pair<int, int>> pixel_list;
+    bool is_enabled = device.getDefectivePixelsCorrection(pixel_list);
+    CHECK_TRUE(is_enabled);
+}
+
+TEST(test_fakeSeeCube, SC_CheckPixelCorrectionChangesRefernce)
+{
+    std::vector<std::pair<int, int>> pixel_list;
+    bool is_enabled = device.getDefectivePixelsCorrection(pixel_list);
+    CHECK_TRUE(is_enabled);
+
+    //Check the zeroth elements, less processing intensive.
+    CHECK_EQUAL(255, pixel_list[0].first);
+    CHECK_EQUAL(255, pixel_list[0].second);
+}
