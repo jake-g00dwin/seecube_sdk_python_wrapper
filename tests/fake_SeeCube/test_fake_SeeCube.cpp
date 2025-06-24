@@ -96,8 +96,28 @@ TEST(test_fakeSeeCube, SC_Stubbedgetsensorsettings)
     CHECK_TRUE(true);
 }
 
-TEST(test_fakeSeeCube, SC_StubbedGetFPS)
+TEST(test_fakeSeeCube, SC_setFPSWorks)
 {
-    CHECK_EQUAL(60.0, device.getDeviceFrameRate());
+    bool result = device.setDeviceFrameRate(30.0);
+    CHECK_TRUE(result);
+    CHECK_EQUAL(30.0, device.getDeviceFrameRate());
 }
+
+TEST(test_fakeSeeCube, SC_setInvalidFPSReturnsFalse)
+{
+    bool result = device.setDeviceFrameRate(fake_max_fps + 1);
+    CHECK_FALSE(result);
+
+    result = device.setDeviceFrameRate(fake_min_fps - 1);
+    CHECK_FALSE(result);
+}
+
+TEST(test_fakeSeeCube, SC_getImageSizeReturnsTrue)
+{
+    size_t width = 1920;
+    size_t height = 1080;
+    bool result = device.getImageSize(width, height);
+    CHECK_TRUE(result);
+}
+
 
