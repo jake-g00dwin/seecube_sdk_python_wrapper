@@ -88,3 +88,10 @@ TEST(test_fakeSeeCube, SC_getPartNumberReturnsString)
     std::string part_number = device.getSerialNumber();
     CHECK_TRUE(part_number.length() != 0);
 }
+
+TEST(test_fakeSeeCube, SC_Stubbedgetsensorsettings)
+{
+    uint16_t a, b, c, d;
+    device.getSensorSettings(a, b, c, d);
+    CHECK_TRUE(true);
+}
