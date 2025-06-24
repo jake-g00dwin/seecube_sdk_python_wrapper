@@ -228,7 +228,7 @@ def main():
             break
 
         # Get the current image data.
-        thermal_img = sc.getRawFrame()
+        thermal_img = device.getRawFrame()
 
         img8 = cv.normalize(
                 thermal_img,
