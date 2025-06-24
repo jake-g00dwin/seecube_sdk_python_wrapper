@@ -158,8 +158,28 @@ TEST(test_fakeSeeCube, SC_getRawImageSucessOnSetTrue)
     }
 }
 
+TEST(test_fakeSeeCube, SC_SetPixelCorrectionTogglesCorrectly)
+{
+    bool is_pixelcorrection = true;
+    device.setDefectivePixelsCorrection(is_pixelcorrection);
+
+    //Confirm it's set using our spy
+    CHECK_TRUE(spy_is_pixelcorrection());
+}
+
+TEST(test_fakeSeeCube, SC_CheckPixelCorrectionEnabledFailsOnUnset)
+{
+    bool is_pixelcorrection = false;
+    device.setDefectivePixelsCorrection(is_pixelcorrection);
+    bool is_enabled = device.getDefectivePixelsCorrection();
+    CHECK_FALSE(is_enabled);
+}
+
 TEST(test_fakeSeeCube, SC_CheckPixelCorrectionEnabledStatus)
 {
+    bool is_pixelcorrection = true;
+    device.setDefectivePixelsCorrection(is_pixelcorrection);
+
     bool is_enabled = device.getDefectivePixelsCorrection();
     CHECK_TRUE(is_enabled);
 }
@@ -173,6 +193,9 @@ TEST(test_fakeSeeCube, SC_CheckPixelCorrectionAcceptsOverload)
 
 TEST(test_fakeSeeCube, SC_CheckPixelCorrectionChangesRefernce)
 {
+    bool is_pixelcorrection = true;
+    device.setDefectivePixelsCorrection(is_pixelcorrection);
+
     std::vector<std::pair<int, int>> pixel_list;
     bool is_enabled = device.getDefectivePixelsCorrection(pixel_list);
     CHECK_TRUE(is_enabled);
@@ -181,3 +204,17 @@ TEST(test_fakeSeeCube, SC_CheckPixelCorrectionChangesRefernce)
     CHECK_EQUAL(255, pixel_list[0].first);
     CHECK_EQUAL(255, pixel_list[0].second);
 }
+
+
+TEST(test_fakeSeeCube, SC_CheckPixelCorrectionOverloadReturnsFalseOnUnset)
+{
+    bool is_pixelcorrection = false;
+    device.setDefectivePixelsCorrection(is_pixelcorrection);
+
+    std::vector<std::pair<int, int>> pixel_list;
+    bool is_enabled = device.getDefectivePixelsCorrection(pixel_list);
+    CHECK_FALSE(is_enabled);
+
+}
+
+
