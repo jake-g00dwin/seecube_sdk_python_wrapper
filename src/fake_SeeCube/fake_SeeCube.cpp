@@ -204,5 +204,3 @@ bool SeeCube::getDefectivePixelsCorrection(
     return true;
 }
 
-
-
