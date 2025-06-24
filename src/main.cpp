@@ -262,12 +262,10 @@ PYBIND11_MODULE(py_seecube, handle) {
                 }) 
         .def("getDeviceFrameRate", &SeeCube::getDeviceFrameRate)
         .def("setDeviceFrameRate", &SeeCube::setDeviceFrameRate)
-        //.def("getImageSize", &SeeCube::getImageSize)
         .def("getImageSize", [](SeeCube &self) {
                 self.getImageSize(GBL_width, GBL_height); 
                 return std::make_tuple(GBL_width, GBL_height);
                 })
-        //.def("getRawFrame", &SeeCube::getRawFrame)
         .def("getRawFrame", [](SeeCube &self) {
 
             std::ptrdiff_t size = GBL_width * GBL_height;
