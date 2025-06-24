@@ -220,6 +220,9 @@ def main():
 
     print("Press `q` to quit.")
 
+    img_shape = (width, height)
+    thermal_img = np.zero(img_shape, np.dtype.uint16)
+
     # Setup OpenCV loop.
     while True:
         # Check conditions for exiting or breaking out of loop.
@@ -228,7 +231,8 @@ def main():
             break
 
         # Get the current image data.
-        thermal_img = device.getRawFrame()
+        # thermal_img = device.getRawFrame()
+        np.copyto(thermal_img, device.getRawFrame())
 
         img8 = cv.normalize(
                 thermal_img,
