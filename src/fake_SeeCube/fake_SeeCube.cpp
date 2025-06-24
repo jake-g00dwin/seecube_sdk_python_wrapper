@@ -109,10 +109,21 @@ void SeeCubeSDK::parseCoreParameter(const std::string& pParameter)
  *################################
  */
 
+
 SeeCube::SeeCube(const int& pHandle,const std::string& mSensorDataPath)
+    : mPrivateData2(pHandle)
 {
-   //Nothing.
+    mPrivateData1 = 0;
+    mPrivateData3 = 0;
+    mPrivateData4 = mSensorDataPath;
 }
+
+
+SeeCube::~SeeCube(void)
+{
+    //std::cout << "Destructor Called!" << std::endl;
+}
+
 
 std::string SeeCube::getPartNumber(void)
 {
@@ -120,4 +131,10 @@ std::string SeeCube::getPartNumber(void)
     return part_number;
 }
 
+
+std::string SeeCube::getSerialNumber(void)
+{
+    std::string part_number{"XXXXXXXXXX"};
+    return part_number;
+}
 
