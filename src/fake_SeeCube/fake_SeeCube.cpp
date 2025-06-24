@@ -25,6 +25,8 @@ float device_framerate = 60.0;
 bool fake_imagesize_return = false;
 bool fake_rawimage_return = false;
 
+bool is_pixelcorrection = false;
+
 void set_FakeSeeCubeDeviceCount(int count)
 {
     FakeSeeCube_DeviceCount = count;
@@ -46,6 +48,12 @@ void fakeSeeCube_setImageSizeReturnValue(bool value)
 void fakeSeeCube_setRawImageReturnBool(bool value)
 {
     fake_rawimage_return = value;
+}
+
+
+bool spy_is_pixelcorrection()
+{
+    return is_pixelcorrection;
 }
 
 
@@ -191,9 +199,14 @@ bool SeeCube::getRawFrame(unsigned char* pData,
 }
 
 
+void SeeCube::setDefectivePixelsCorrection(const bool& pStatus)
+{
+    is_pixelcorrection = pStatus;
+}
+
 bool SeeCube::getDefectivePixelsCorrection(void)
 {
-    return true;
+    return is_pixelcorrection;
 }
 
 
@@ -201,6 +214,6 @@ bool SeeCube::getDefectivePixelsCorrection(
         std::vector<std::pair<int, int>>& pDefectivePixelsList)
 {
     pDefectivePixelsList.push_back({255, 255});
-    return true;
+    return is_pixelcorrection;
 }
 

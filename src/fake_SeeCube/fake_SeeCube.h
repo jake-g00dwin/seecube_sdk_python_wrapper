@@ -27,5 +27,6 @@ void set_FakeSeeCubeDeviceCount(int count);
 void fakeSeeCube_setCameraConnectionState(bool set_connected);
 void fakeSeeCube_setImageSizeReturnValue(bool value);
 void fakeSeeCube_setRawImageReturnBool(bool value);
+bool spy_is_pixelcorrection();
 
 #endif // FAKE_SEECUBE
