@@ -274,7 +274,7 @@ PYBIND11_MODULE(py_seecube, handle) {
             uint16_t *rawFrame = new uint16_t[size];
 
             //Get the data from the camera.
-            if(!self.getRawFrame((uint8_t*)rawFrame, &thermalMetadata, 250)) {
+            if(!self.getRawFrame((uint8_t*)rawFrame, &thermalMetadata)) {
                 std::cout << "No new frame received!" << std::endl;
             }
          
