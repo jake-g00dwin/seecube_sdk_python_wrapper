@@ -23,10 +23,12 @@ extern "C"
 TEST_GROUP(test_fakeSeeCube)
 {
     SeeCubeSDK sc_sdk;
+    SeeCube device;
     void setup()
     {
         //Declareing an instance of the SeeCubeSDK class as sc_sdk
         SeeCubeSDK sc_sdk(SeeCubeSDK::verbosityLevel::info, 1);
+        SeeCube device(0, "./data");
     }
     void teardown()
     {
@@ -79,4 +81,10 @@ TEST(test_fakeSeeCube, SCSDK_isConnectedReturnsTrueWhenFlagSet)
 {
     fakeSeeCube_setCameraConnectionState(true);
     CHECK_TRUE(sc_sdk.isConnected()); 
+}
+
+TEST(test_fakeSeeCube, SC_getPartNumberReturnsString)
+{
+    std::string part_number = device.getSerialNumber();
+    CHECK_TRUE(part_number.length() != 0);
 }
