@@ -80,9 +80,9 @@ def controller(img, brightness=255, contrast=127):
 def BrightnessContrast(img, brightness=0):
     # getTrackbarPos returns the current
     # position of the specified trackbar.
-    brightness = cv.getTrackbarPos("Brightness", "Brightness/Contrast")
+    brightness = cv.getTrackbarPos("Brightness", "Thermal frame")
 
-    contrast = cv.getTrackbarPos("Contrast", "Brightness/Contrast")
+    contrast = cv.getTrackbarPos("Contrast", "Thermal frame")
 
     effect = controller(img, brightness, contrast)
 
@@ -207,16 +207,14 @@ def main():
     cv.namedWindow("Color frame", cv.WINDOW_NORMAL | cv.WINDOW_KEEPRATIO)
     cv.resizeWindow("Color frame", width, height)
 
-    """
     cv.createTrackbar(
-        "Brightness", "Brightness/Contrast", 255, 2 * 255, BrightnessContrast
+        "Brightness", "Thermal frame", 255, 2 * 255, BrightnessContrast
     )
 
     # Contrast range -127 to 127
     cv.createTrackbar(
-        "Contrast", "Brightness/Contrast", 127, 2 * 127, BrightnessContrast
+        "Contrast", "Thermal frame", 127, 2 * 127, BrightnessContrast
     )
-    """
 
     print("Press `q` to quit.")
 
@@ -243,13 +241,16 @@ def main():
 
         img8 = np.uint8(img8)
 
-        adj = clahe.apply(img8)
+        adj = BrightnessContrast(img8.copy())
         adj = cv.cvtColor(adj, cv.COLOR_GRAY2BGR)
 
-        color_img = cv.applyColorMap(adj, cv.COLORMAP_INFERNO)
+        adj2 = clahe.apply(img8)
+        adj2 = cv.cvtColor(adj2, cv.COLOR_GRAY2BGR)
+
+        color_img = cv.applyColorMap(adj2, cv.COLORMAP_INFERNO)
 
         # Update the image for each window.
-        cv.imshow("Thermal frame", thermal_img)
+        cv.imshow("Thermal frame", adj)
         cv.imshow("Color frame", color_img)
 
     # Clean up all the CV stuff.
