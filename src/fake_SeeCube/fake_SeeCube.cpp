@@ -15,20 +15,11 @@
  */
 
 
-
-// dumb test function
-int add_two(int a)
-{
-    int b = a;
-    b += 2;
-    return b;
-}
-
-
 int FakeSeeCube_DeviceCount;
 std::string device_name = "";
 bool is_connected = false;
 
+float device_framerate = 60.0;
 
 void set_FakeSeeCubeDeviceCount(int count)
 {
@@ -150,5 +141,27 @@ void SeeCube::getSensorSettings(uint16_t& pTINT,
 
 float SeeCube::getDeviceFrameRate(void)
 {
-    return 60.0;
+    return device_framerate;
 }
+
+
+bool SeeCube::setDeviceFrameRate(const float& pFrameRate)
+{
+    if(pFrameRate > fake_max_fps || pFrameRate < fake_min_fps){
+        return false;
+    }
+    
+    device_framerate = pFrameRate;
+    return true;
+}
+
+
+bool SeeCube::getImageSize(size_t& pWidth, size_t& pHeight)
+{
+    pWidth = fake_width_default;
+    pHeight = fake_height_default;
+    return true;
+}
+
+
+

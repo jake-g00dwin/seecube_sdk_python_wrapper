@@ -17,7 +17,11 @@
 
 #include "SeeCube_SDK_user.h"
 
-int  add_two(int a);
+#define fake_max_fps 120
+#define fake_min_fps 24
+
+#define fake_width_default 1920
+#define fake_height_default 1080
 
 void set_FakeSeeCubeDeviceCount(int count);
 void fakeSeeCube_setCameraConnectionState(bool set_connected);
