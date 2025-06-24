@@ -1,4 +1,4 @@
-add_library(fake_SeeCube STATIC
+add_library(fake_SeeCube SHARED 
     fake_SeeCube.cpp
 )
 
