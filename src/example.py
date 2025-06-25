@@ -159,7 +159,6 @@ def main():
             break
 
         # Get the current image data.
-        # thermal_img = device.getRawFrame()
         np.copyto(thermal_img, device.getRawFrame())
         np.copyto(color_img, device.getColorFrame())
 
