@@ -314,7 +314,22 @@ PYBIND11_MODULE(py_seecube, handle) {
                 rawFrame,
                 free_when_done
             );
-        })
+        }, R"pbdoc(
+For receiving a single frame using direct assingment is fine, however for 
+multiple frames you'll need to preform a deep copy so that the memory assigned
+to hold that previous frame is freed.
+
+Example(single frame):
+
+# SeeCube Object
+frame = device.getRawFame()
+
+
+Example(Multiple frames):
+shape = (height, width)
+frame = numpy.zeros(shape, numpy.uint16_t)
+np.copyto(frame, device.getRawFrame())
+        )pbdoc")
 
         .def("getColorFrame", [](SeeCube &self) {
             std::ptrdiff_t size = GBL_width * GBL_height;
