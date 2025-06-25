@@ -111,19 +111,19 @@ def main():
     flat_field_correction = device.getFFC()
     column_destriping = device.getColumnDestriping()
 
+    device.setDefectivePixelsCorrection(True)
     defective_pixels_correction = device.getDefectivePixelsCorrectionStatus()
     defective_pixels = None
+    result = False
     if(defective_pixels_correction):
         print("Defective pixel correction: Enabled")
         result, defective_pixels = device.getDefectivePixelsCorrection()
     else:
         print("Defective pixel correction: Disabled")
 
-    """
-    if(printDefectivePixels):
+    if(printDefectivePixels and result):
         for pixel in defective_pixels:
-            print("Defective pixel at ({}, {})\n".format(pixel.x pixel.y))
-    """
+            print("Defective pixel at ({}, {})\n".format(pixel[0], pixel[1]))
 
     # Gather data on correction and filtering settings.
     shutterlessCorrection = device.getShutterlessCorrection()
