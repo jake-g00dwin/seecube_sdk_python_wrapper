@@ -319,11 +319,20 @@ PYBIND11_MODULE(py_seecube, handle) {
                 std::cout << "No new frame received!" << std::endl;
             }
          
-            std::vector<std::ptrdiff_t> shape = {(std::ptrdiff_t)GBL_height, (std::ptrdiff_t)GBL_width};
+            std::vector<std::ptrdiff_t> shape = {
+            (std::ptrdiff_t)GBL_height,
+            (std::ptrdiff_t)GBL_width,
+            3};
+
+
             std::vector<std::ptrdiff_t> strides = {
                 static_cast<std::ptrdiff_t>(GBL_width * sizeof(rgb)),
-                sizeof(rgb)
+                sizeof(rgb),
+                1
             };
+
+            // Cast to a byte pointer.
+            uint8_t *raw = reinterpret_cast<uint8_t*>(colorFrame);
 
             // 250 is the timout value in ms.
             //self.getRawFrame((uint8_t *)colorFrame, &thermalMetadata, 250); 
@@ -332,12 +341,26 @@ PYBIND11_MODULE(py_seecube, handle) {
                 delete[] colorFrame;        
             });
 
+            return py::array(
+                py::buffer_info(
+                    raw,
+                    sizeof(uint8_t),
+                    py::format_descriptor<uint8_t>::format(),
+                    3,  // NDim
+                    shape,
+                    strides
+                ),
+                free_when_done
+            );
+
+            /*
             return py::array_t<rgb, py::array::c_style>(
                 shape,
                 strides, 
                 colorFrame,
                 free_when_done
             );
+            */
         })
         .def("getProcessingFrameRate", &SeeCube::getProcessingFrameRate)
         .def("setProcessingFrameRate", &SeeCube::setProcessingFrameRate)
