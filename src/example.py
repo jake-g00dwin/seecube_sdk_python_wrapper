@@ -220,6 +220,7 @@ def main():
 
     img_shape = (height, width)
     thermal_img = np.zeros(img_shape, np.uint16)
+    # color_img = np.zeros(img_shape, np.uint16)
 
     # Setup OpenCV loop.
     while True:
@@ -231,6 +232,7 @@ def main():
         # Get the current image data.
         # thermal_img = device.getRawFrame()
         np.copyto(thermal_img, device.getRawFrame())
+        # np.copyto(color_img, device.getColorFrame())
 
         img8 = cv.normalize(
                 thermal_img,
