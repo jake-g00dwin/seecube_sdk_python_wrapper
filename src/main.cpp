@@ -235,8 +235,11 @@ PYBIND11_MODULE(py_seecube, handle) {
         .def(py::init<SeeCubeSDK::verbosityLevel, const int&>(),
             py::arg("verbosityLevel"), py::arg("value")) // Constructor
         .def("getDeviceCount", &SeeCubeSDK::getDeviceCount)
-        .def("getDeviceName", &SeeCubeSDK::getDeviceName, py::return_value_policy::copy)
-        .def("isConnected", &SeeCubeSDK::isConnected)
+        .def("getDeviceName", &SeeCubeSDK::getDeviceName, 
+            py::arg("pHandle") = 0,
+            py::return_value_policy::copy)
+        .def("isConnected", &SeeCubeSDK::isConnected,
+            py::arg("pHandle") = 0)
         .def("parseCoreParameter", &SeeCubeSDK::parseCoreParameter);
 
     // SeeCube SECTION:
@@ -270,7 +273,8 @@ PYBIND11_MODULE(py_seecube, handle) {
                 uint16_t TINT, GFID, GSK, GAIN;       
                 self.getSensorSettings(TINT, GFID, GSK, GAIN);
                 return std::make_tuple(TINT, GFID, GSK, GAIN);
-                }, R"pbdoc(
+                },
+                R"pbdoc(
  param[out] TINT variable where the integration time value will be stored.
  param[out] GFID variable where the transistors gate voltage for the active microbolometers value will be stored.
  param[out] GSK  variable where the transistors gate voltage for the compensation microbolometers value will be stored.
