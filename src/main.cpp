@@ -311,7 +311,35 @@ PYBIND11_MODULE(py_seecube, handle) {
                 free_when_done
             );
         })
-        .def("getColorFrame", &SeeCube::getColorFrame)
+        .def("getColorFrame", [](SeeCube &self) {
+            std::ptrdiff_t size = GBL_width * GBL_height;
+            rgb *colorFrame = new rgb[size];
+
+            //Get the data from the camera.
+            if(!self.getRawFrame((uint8_t*)colorFrame, &thermalMetadata)) {
+                std::cout << "No new frame received!" << std::endl;
+            }
+         
+            std::vector<std::ptrdiff_t> shape = {(std::ptrdiff_t)GBL_height, (std::ptrdiff_t)GBL_width};
+            std::vector<std::ptrdiff_t> strides = {
+                static_cast<std::ptrdiff_t>(GBL_width * sizeof(rgb)),
+                sizeof(rgb)
+            };
+
+            // 250 is the timout value in ms.
+            //self.getRawFrame((uint8_t *)colorFrame, &thermalMetadata, 250); 
+            py::capsule free_when_done(colorFrame, [](void *f){
+                rgb *colorFrame = reinterpret_cast<rgb*>(f);
+                delete[] colorFrame;        
+            });
+
+            return py::array_t<rgb, py::array::c_style>(
+                shape,
+                strides, 
+                colorFrame,
+                free_when_done
+            );
+        })
         .def("getProcessingFrameRate", &SeeCube::getProcessingFrameRate)
         .def("setProcessingFrameRate", &SeeCube::setProcessingFrameRate)
         .def("setFreeRun", &SeeCube::setFreeRun)
