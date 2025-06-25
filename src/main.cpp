@@ -137,6 +137,16 @@ void test_SDKFunction(void) {
 
 }
 
+SeeCube::metadata get_ThermalMetaData(void){
+    SeeCube::metadata md;
+    return md;
+}
+
+SeeCube::metadata get_ColorMetaData(void){
+    SeeCube::metadata md;
+    return md;
+}
+
 SeeCube::metadata get_LastMetaData(void){
     SeeCube::metadata md; 
     
@@ -222,17 +232,6 @@ PYBIND11_MODULE(py_seecube, handle) {
                 py::arg("verbosityLevel"), py::arg("value")) // Constructor
         .def("getDeviceCount", &SeeCubeSDK::getDeviceCount)
         .def("getDeviceName", &SeeCubeSDK::getDeviceName, py::return_value_policy::copy)
-        /*
-        .def("getDeviceName", [](SeeCubeSDK &self, int pHandle) {
-                    try {
-                        return self.getDeviceName(pHandle);
-                    } catch (const std::exception& e) {
-                        throw std::runtime_error(std::string("C++ exeception: ") + e.what());
-                    } catch (...) {
-                        throw std::runtime_error("Unknown C++ exeception");
-                    }
-                })
-        */
         .def("isConnected", &SeeCubeSDK::isConnected)
         .def("parseCoreParameter", &SeeCubeSDK::parseCoreParameter);
 
