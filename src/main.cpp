@@ -62,7 +62,6 @@ void allocate_metadata(void) {
         return;
     }
     is_metadata_allocated = true;
-    //This feels...wrong.
     /*
      * I'm keeping the old lines here for refernce as they seem to be a result
      * of the original developers likely coming from a only C background.
@@ -198,12 +197,16 @@ py::array_t<uint16_t, py::array::c_style> get_TestFrame(size_t width, size_t hei
 
 PYBIND11_MODULE(py_seecube, handle) {
     handle.doc() = "This is the module docs.";
+    handle.doc() = R"pbdoc(
+        py_seecube 
+        --------
+        This module provides bindings for the SeeCube SDK and related functionality.
+    )pbdoc";
     handle.def("test_SDKFunction", &test_SDKFunction);
     handle.def("allocate_metadata", &allocate_metadata);
     handle.def("delete_metadata", &delete_metadata);
     handle.def("allocate_imagedata", &allocate_imagedata);
     handle.def("delete_imagedata", &delete_imagedata);
-    //handle.def("get_rawimg", &get_rawimg);
     handle.def("get_TestFrame", &get_TestFrame); 
     handle.def("get_LastMetaData", &get_LastMetaData);
 
