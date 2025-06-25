@@ -63,8 +63,21 @@ void allocate_metadata(void) {
     }
     is_metadata_allocated = true;
     //This feels...wrong.
+    /*
+     * I'm keeping the old lines here for refernce as they seem to be a result
+     * of the original developers likely coming from a only C background.
+     *
+     * The new keyword should need the sizeof() function call as the keyword 
+     * itself and syntax for new already has a type.
+     */
+
+    /*
     thermalMetadata.histogram = new uint32_t[(UINT16_MAX + 1) * sizeof(uint32_t)];
     colorMetadata.histogram = new uint32_t[(UINT16_MAX + 1) * sizeof(uint32_t)];
+    */
+
+    thermalMetadata.histogram = new uint32_t[(UINT16_MAX + 1)];
+    colorMetadata.histogram = new uint32_t[(UINT16_MAX + 1)];
 }
 
 //This should always be called at the end.
@@ -87,9 +100,8 @@ void allocate_imagedata(size_t width, size_t height) {
     GBL_height = height;
     GBL_width = width;
 
-    //This also feels wrong...it follows the example from the manufacturer howevew.
-    uint16_t* thermalImg = new uint16_t[width * height * sizeof(uint16_t)];
-    rgb* colorImg = new rgb[width * height * sizeof(rgb)];
+    uint16_t* thermalImg = new uint16_t[width * height ];
+    rgb* colorImg = new rgb[width * height];
     is_imagedata_allocated = true;
 }
 
@@ -102,26 +114,6 @@ void delete_imagedata(void){
     delete [] colorImg; 
     is_imagedata_allocated = false;
 }
-
-// Function to return thermal metadata.
-
-// Function to return color metadata.
-
-// Get the latest thermal frame from the device
-// Timeout value is in milliseconds.
-// If 0 is used, returns immediately if no frame is available.
-// If -1 is used, it waits indefinitely for a new frame.
-//  - software trigger must be sent from another thread if the device is not in free run mode, this call will block until a new frame is available.
-/*
-if (device.getRawFrame((uint8_t*)thermalImg, &thermalMetadata, 250) &&
-    printMetadata && (frameCounter % 30 == 0)) {
-    print("Thermal frame metadata: {:.2f} {:d} {:d} {:d}\n", thermalMetadata.sensorTemperature,    // FPA temperature in Kelvin
-                                                             thermalMetadata.frameCounter,         // Total frames aquired by the device
-                                                             thermalMetadata.relativeTimestamp,    // Relative timestamp in milliseconds since last transfered thermal frame
-                                                             thermalMetadata.epochTimestamp);      // Absolute timestamp in milliseconds
-}
-*/
-
 
 void test_SDKFunction(void) {
     std::cout << "test_SDKFunction():" << std::endl;
