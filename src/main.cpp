@@ -344,14 +344,6 @@ PYBIND11_MODULE(py_seecube, handle) {
                 free_when_done
             );
 
-            /*
-            return py::array_t<rgb, py::array::c_style>(
-                shape,
-                strides, 
-                colorFrame,
-                free_when_done
-            );
-            */
         })
         .def("getProcessingFrameRate", &SeeCube::getProcessingFrameRate)
         .def("setProcessingFrameRate", &SeeCube::setProcessingFrameRate)
