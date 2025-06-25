@@ -27,6 +27,7 @@ message("Serial Numbers: ${SDK_SERIAL}\n\n")
 # First thing to check is if we are in unit testing mode.
 # If we are then we want to link the fake library for testing.
 if(UNIT_TESTING)
+    add_compile_definitions(UNIT_TESTING=1)
     add_subdirectory(fake_SeeCube)
     message("Linking with Fake libraries for unit testing.")
     target_link_libraries(${PROJECT_NAME} PRIVATE
