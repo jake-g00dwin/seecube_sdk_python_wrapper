@@ -217,4 +217,3 @@ TEST(test_fakeSeeCube, SC_CheckPixelCorrectionOverloadReturnsFalseOnUnset)
 
 }
 
-
