@@ -285,13 +285,13 @@ PYBIND11_MODULE(py_seecube, handle) {
                 return std::make_tuple(GBL_width, GBL_height);
                 })
 
-        .def("getRawFrame", [](SeeCube &self) {
+        .def("getRawFrame", [](SeeCube &self, uint32_t Timeout) {
 
             std::ptrdiff_t size = GBL_width * GBL_height;
             uint16_t *rawFrame = new uint16_t[size];
 
             //Get the data from the camera.
-            if(!self.getRawFrame((uint8_t*)rawFrame, &thermalMetadata)) {
+            if(!self.getRawFrame((uint8_t*)rawFrame, &thermalMetadata, Timeout)) {
                 std::cout << "No new thermal frame received!" << std::endl;
             }
          
@@ -314,7 +314,10 @@ PYBIND11_MODULE(py_seecube, handle) {
                 rawFrame,
                 free_when_done
             );
-        }, R"pbdoc(
+        }, py::arg("Timeout") = 0, R"pbdoc(
+Args:
+    Timeout: Timeout value in milliseconds for frame acquisition.(Default 0)
+
 For receiving a single frame using direct assingment is fine, however for 
 multiple frames you'll need to preform a deep copy so that the memory assigned
 to hold that previous frame is freed.
@@ -331,12 +334,12 @@ frame = numpy.zeros(shape, numpy.uint16_t)
 np.copyto(frame, device.getRawFrame())
         )pbdoc")
 
-        .def("getColorFrame", [](SeeCube &self) {
+        .def("getColorFrame", [](SeeCube &self, uint32_t Timeout) {
             std::ptrdiff_t size = GBL_width * GBL_height;
             rgb *colorFrame = new rgb[size];
 
             //Get the data from the camera.
-            if(!self.getColorFrame((uint8_t*)colorFrame, &colorMetadata)) {
+            if(!self.getColorFrame((uint8_t*)colorFrame, &colorMetadata, Timeout)) {
                 std::cout << "No new color frame received!" << std::endl;
             }
          
@@ -374,7 +377,8 @@ np.copyto(frame, device.getRawFrame())
                 free_when_done
             );
 
-        })
+        }, py::arg("Timeout") = 0, R"pbdoc(
+        )pbdoc")
         .def("getProcessingFrameRate", &SeeCube::getProcessingFrameRate)
 
         .def("setProcessingFrameRate", &SeeCube::setProcessingFrameRate)
