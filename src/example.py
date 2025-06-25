@@ -28,79 +28,13 @@ printTargetTemperature = False
 clahe = cv.createCLAHE(5, (5, 5))
 
 
-def exract_project_version(file_path):
-    version_pattern = re.compile(
-            r'project\s*\([^\)]+VERSION\s+([\d\.]+)',
-            re.IGNORECASE)
-
-    try:
-        with open(file_path, 'r', encoding='utf-8') as cmake_file:
-            for line in cmake_file:
-                match = version_pattern.search(line)
-                if match:
-                    return match.group(1)
-    except FileNotFoundError:
-        print(f"File not found: {file_path}")
-    except Exception as e:
-        print(f"Error reading file: {e}")
-
-
-def controller(img, brightness=255, contrast=127):
-    brightness = int((brightness - 0) * (255 - (-255)) / (510 - 0) + (-255))
-    contrast = int((contrast - 0) * (127 - (-127)) / (254 - 0) + (-127))
-
-    if brightness != 0:
-        if brightness > 0:
-            shadow = brightness
-            max = 255
-        else:
-            shadow = 0
-            max = 255 + brightness
-
-        al_pha = (max - shadow) / 255
-        ga_mma = shadow
-
-        # The function addWeighted calculates
-        # the weighted sum of two arrays
-        cal = cv.addWeighted(img, al_pha, img, 0, ga_mma)
-
-    else:
-        cal = img
-    if contrast != 0:
-        Alpha = float(131 * (contrast + 127)) / (127 * (131 - contrast))
-        Gamma = 127 * (1 - Alpha)
-
-        # The function addWeighted calculates
-        # the weighted sum of two arrays
-        cal = cv.addWeighted(cal, Alpha, cal, 0, Gamma)
-
-    return cal
-
-
-def BrightnessContrast(img, brightness=0):
-    # getTrackbarPos returns the current
-    # position of the specified trackbar.
-    brightness = cv.getTrackbarPos("Brightness", "Thermal frame")
-
-    contrast = cv.getTrackbarPos("Contrast", "Thermal frame")
-
-    effect = controller(img, brightness, contrast)
-
-    return effect
-
-
 def intro_print():
     print("SeeCube SDK pybindings Example:")
     print("OpenCV version:", cv.__version__)
 
 
-def cli_menu():
-    print("")
-
-
 def main():
     intro_print()
-    cli_menu()
 
     # Initalize the SeeCubeSDK.
     sc_sdk = sc.SeeCubeSDK(
@@ -207,20 +141,15 @@ def main():
     cv.namedWindow("Color frame", cv.WINDOW_NORMAL | cv.WINDOW_KEEPRATIO)
     cv.resizeWindow("Color frame", width, height)
 
-    cv.createTrackbar(
-        "Brightness", "Thermal frame", 255, 2 * 255, BrightnessContrast
-    )
-
-    # Contrast range -127 to 127
-    cv.createTrackbar(
-        "Contrast", "Thermal frame", 127, 2 * 127, BrightnessContrast
-    )
-
     print("Press `q` to quit.")
 
+    # Create a local matrix to hold thermal image data.
     img_shape = (height, width)
     thermal_img = np.zeros(img_shape, np.uint16)
-    # color_img = np.zeros(img_shape, np.uint16)
+
+    # Create a local matrix to hold color image data.
+    color_img_shape = (height, width, 3)
+    color_img = np.zeros(color_img_shape, np.uint8)
 
     # Setup OpenCV loop.
     while True:
@@ -232,8 +161,9 @@ def main():
         # Get the current image data.
         # thermal_img = device.getRawFrame()
         np.copyto(thermal_img, device.getRawFrame())
-        # np.copyto(color_img, device.getColorFrame())
+        np.copyto(color_img, device.getColorFrame())
 
+        # Manual application of normalization.
         img8 = cv.normalize(
                 thermal_img,
                 None,
@@ -243,17 +173,15 @@ def main():
 
         img8 = np.uint8(img8)
 
-        adj = BrightnessContrast(img8.copy())
-        adj = cv.cvtColor(adj, cv.COLOR_GRAY2BGR)
+        # Putting the data into format openCV uses.
+        thermal_adj = cv.cvtColor(img8, cv.COLOR_GRAY2BGR)
 
-        adj2 = clahe.apply(img8)
-        adj2 = cv.cvtColor(adj2, cv.COLOR_GRAY2BGR)
-
-        color_img = cv.applyColorMap(adj2, cv.COLORMAP_INFERNO)
+        # Putting the data into format openCV uses.
+        color_adj = cv.cvtColor(color_img, cv.COLOR_RGB2BGR)
 
         # Update the image for each window.
-        cv.imshow("Thermal frame", adj)
-        cv.imshow("Color frame", color_img)
+        cv.imshow("Thermal frame", thermal_adj)
+        cv.imshow("Color frame", color_adj)
 
     # Clean up all the CV stuff.
     cv.destroyAllWindows()
@@ -265,6 +193,5 @@ def main():
     exit(0)
 
 
-# This is diabled by default when testing.
 # Call The main function
 main()
