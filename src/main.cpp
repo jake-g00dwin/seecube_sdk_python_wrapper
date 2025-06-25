@@ -232,7 +232,7 @@ PYBIND11_MODULE(py_seecube, handle) {
     //Binding the class and it's constructor methods.
     cls
         .def(py::init<SeeCubeSDK::verbosityLevel, const int&>(),
-                py::arg("verbosityLevel"), py::arg("value")) // Constructor
+            py::arg("verbosityLevel"), py::arg("value")) // Constructor
         .def("getDeviceCount", &SeeCubeSDK::getDeviceCount)
         .def("getDeviceName", &SeeCubeSDK::getDeviceName, py::return_value_policy::copy)
         .def("isConnected", &SeeCubeSDK::isConnected)
@@ -249,7 +249,6 @@ PYBIND11_MODULE(py_seecube, handle) {
         .value("adaptive", SeeCube::mapping::adaptive)
         .export_values();
 
-
     py::class_<SeeCube::metadata>(sc_cls, "metadata")
         .def(py::init<>())
         .def_readwrite("sensorTemperature", &SeeCube::metadata::sensorTemperature)
@@ -261,19 +260,31 @@ PYBIND11_MODULE(py_seecube, handle) {
     sc_cls
         .def(py::init<const int&, const std::string&>(),
                 py::arg("pHandle"), py::arg("mSensorDataPath"))
+
         .def("getPartNumber", &SeeCube::getPartNumber)
+
         .def("getSerialNumber", &SeeCube::getSerialNumber)
+
         .def("getSensorSettings", [](SeeCube &self) {
                 uint16_t TINT, GFID, GSK, GAIN;       
                 self.getSensorSettings(TINT, GFID, GSK, GAIN);
                 return std::make_tuple(TINT, GFID, GSK, GAIN);
-                }) 
+                }, R"pbdoc(
+ param[out] TINT variable where the integration time value will be stored.
+ param[out] GFID variable where the transistors gate voltage for the active microbolometers value will be stored.
+ param[out] GSK  variable where the transistors gate voltage for the compensation microbolometers value will be stored.
+ param[out] GAIN variable where the external trigger mode / gain / window invert-revert-rotation values will be stored.
+                )pbdoc") 
+
         .def("getDeviceFrameRate", &SeeCube::getDeviceFrameRate)
+
         .def("setDeviceFrameRate", &SeeCube::setDeviceFrameRate)
+
         .def("getImageSize", [](SeeCube &self) {
                 self.getImageSize(GBL_width, GBL_height); 
                 return std::make_tuple(GBL_width, GBL_height);
                 })
+
         .def("getRawFrame", [](SeeCube &self) {
 
             std::ptrdiff_t size = GBL_width * GBL_height;
@@ -304,6 +315,7 @@ PYBIND11_MODULE(py_seecube, handle) {
                 free_when_done
             );
         })
+
         .def("getColorFrame", [](SeeCube &self) {
             std::ptrdiff_t size = GBL_width * GBL_height;
             rgb *colorFrame = new rgb[size];
@@ -349,21 +361,33 @@ PYBIND11_MODULE(py_seecube, handle) {
 
         })
         .def("getProcessingFrameRate", &SeeCube::getProcessingFrameRate)
+
         .def("setProcessingFrameRate", &SeeCube::setProcessingFrameRate)
+
         .def("setFreeRun", &SeeCube::setFreeRun)
+
         .def("getFreeRun", &SeeCube::getFreeRun)
+
         .def("runFFC", &SeeCube::runFFC)
+
         .def("setFFC", &SeeCube::setFFC)
+
         .def("getFFC", &SeeCube::getFFC)
+
         .def("closeShutter", &SeeCube::closeShutter)
+
         .def("openShutter", &SeeCube::openShutter)
+
         .def("setColorPreset", &SeeCube::setColorPreset)
+
         .def("getColorPreset", &SeeCube::getColorPreset)
+
         .def("setDefectivePixelsCorrection", &SeeCube::setDefectivePixelsCorrection)
 
         //Overloaded function
         .def("getDefectivePixelsCorrectionStatus",
                 static_cast<bool (SeeCube::*)()>(&SeeCube::getDefectivePixelsCorrection))
+
         .def("getDefectivePixelsCorrection", [](SeeCube &self) {
                     std::vector<std::pair<int, int>> defective_pixels;
                     bool result = self.getDefectivePixelsCorrection(defective_pixels);
@@ -371,20 +395,31 @@ PYBIND11_MODULE(py_seecube, handle) {
                 })
 
         .def("setShutterlessCorrection", &SeeCube::setShutterlessCorrection)
+
         .def("getShutterlessCorrection", &SeeCube::getShutterlessCorrection)
+
         .def("setRadiometricCorrection", &SeeCube::setRadiometricCorrection)
+
         .def("getRadiometricCorrection", &SeeCube::getRadiometricCorrection)
+        
         .def("getSensorTemperature", &SeeCube::getSensorTemperature)
+
         .def("getPixelTemperature", &SeeCube::getPixelTemperature)
+
         .def("setMappingMode", &SeeCube::setMappingMode,
                 py::arg("mapping"),
                 py::arg("pFirstParam") = -1.0f,
                 py::arg("pSecondParam") = -1.0f)
         .def("getMappingMode", &SeeCube::getMappingMode)
+
         .def("setColumnDestriping", &SeeCube::setColumnDestriping)
+
         .def("getColumnDestriping", &SeeCube::getColumnDestriping)
+
         .def("setTemporalFiltering", &SeeCube::setTemporalFiltering)
+
         .def("getTemporalFiltering", &SeeCube::getTemporalFiltering)
+
         .def("softwareTriggerRequest", &SeeCube::softwareTriggerRequest);
         
 }
