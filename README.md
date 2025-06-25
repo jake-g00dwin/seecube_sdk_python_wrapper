@@ -56,7 +56,11 @@ the module is located then import it.
 
 If you're running on windows you'll want to first copy the library files from
 the `src/windows/` sub-directory into the same location that the new library
-files are located.
+files are located if the build system hasn't already copied them.
+
+**NOTE:** As of the last testing the non-debug build of the SeeCube SDK has 
+issues, use the files `SeeCubed.lib` and `SeeCubed.dll` instead.
+
 
 ```sh
 python3.10
@@ -83,6 +87,13 @@ cmake ..; msbuild ALL_BUILD.vcxproj
 ```
 Once the build process is finished the library/python module will be in the
 `build/src/Debug/` sub-directory.
+
+You can run the script in this directory like so:
+```
+# Copies the script to same location as newly built library.
+cp ../../../src/example.py ./; python.exe ./example.py
+
+```
 
 
 ## Building (Linux/Unix) 
