@@ -15,7 +15,7 @@ builds that support various serial numbers of cameras.
 
 ## Requirements
 
-- Python3.10
+- Python3.10 or newer.
 - pybind11, for C++ to python bindings.
 - pytest, for unit testing.
 - Cmake, for building the library.
@@ -63,7 +63,7 @@ issues, use the files `SeeCubed.lib` and `SeeCubed.dll` instead.
 
 
 ```sh
-python3.10
+python3.10 # Substitute with your python version.
 >>>import py_seecube
 >>>sc_sdk = py_seecube.SeeCubeSDK(py_seecube.SeeCubeSDK.verbosityLevel.info, 1)
 ```
