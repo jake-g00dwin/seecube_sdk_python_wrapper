@@ -287,7 +287,7 @@ PYBIND11_MODULE(py_seecube, handle) {
 
             //Get the data from the camera.
             if(!self.getRawFrame((uint8_t*)rawFrame, &thermalMetadata)) {
-                std::cout << "No new frame received!" << std::endl;
+                std::cout << "No new thermal frame received!" << std::endl;
             }
          
             std::vector<std::ptrdiff_t> shape = {(std::ptrdiff_t)GBL_height, (std::ptrdiff_t)GBL_width};
@@ -315,8 +315,8 @@ PYBIND11_MODULE(py_seecube, handle) {
             rgb *colorFrame = new rgb[size];
 
             //Get the data from the camera.
-            if(!self.getRawFrame((uint8_t*)colorFrame, &thermalMetadata)) {
-                std::cout << "No new frame received!" << std::endl;
+            if(!self.getColorFrame((uint8_t*)colorFrame, &colorMetadata)) {
+                std::cout << "No new color frame received!" << std::endl;
             }
          
             std::vector<std::ptrdiff_t> shape = {
