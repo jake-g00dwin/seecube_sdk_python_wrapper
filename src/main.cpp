@@ -424,7 +424,10 @@ np.copyto(frame, device.getRawFrame())
         
         .def("getSensorTemperature", &SeeCube::getSensorTemperature)
 
-        .def("getPixelTemperature", &SeeCube::getPixelTemperature)
+        .def("getPixelTemperature", &SeeCube::getPixelTemperature,
+                py::arg("X"),
+                py::arg("Y"),
+                py::arg("Emissivity") = 100.0f)
 
         .def("setMappingMode", &SeeCube::setMappingMode,
                 py::arg("mapping"),
