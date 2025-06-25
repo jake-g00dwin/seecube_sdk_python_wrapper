@@ -11,7 +11,6 @@
 #include <pybind11/numpy.h>
 
 // The SeeCube SDK header(s)
-#define UNIT_TESTING 1
 #ifdef UNIT_TESTING
     #include "fake_SeeCube.h"
 #else
