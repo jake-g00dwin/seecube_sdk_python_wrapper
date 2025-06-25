@@ -2,7 +2,7 @@
 # FileName: example.py
 # Description: Example/Demo of SeeCube SDK python bindings.
 
-import re
+import sys
 import cv2 as cv
 import numpy as np
 from pathlib import Path
@@ -48,7 +48,7 @@ def main():
     if(count <= 0):
         print("No device found\n")
         print("Exiting...")
-        exit(1)
+        sys.exit(1)
 
     print("Displaying devices:\n")
     for i in range(count):
@@ -68,7 +68,7 @@ def main():
     if(not sc_sdk.isConnected(0)):
         print("Error: Failed to connect to device!\n")
         print("Exiting...")
-        exit(1)
+        sys.exit(1)
 
     print("Success: Device now connected.")
 
@@ -190,7 +190,7 @@ def main():
     sc.delete_metadata()
     sc.delete_imagedata()
 
-    exit(0)
+    sys.exit(0)
 
 
 # Call The main function
