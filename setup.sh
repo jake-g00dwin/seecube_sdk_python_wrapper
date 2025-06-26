@@ -13,9 +13,9 @@ PY_VER="python3.10"
 install_pkg () {
     PKG=$1
     ICMD=""
-    if [ $DEBIAN -eq 1]; then
+    if [ $DEBIAN -eq 1 ]; then
         ICMD="sudo apt install ${PKG}"
-    elif [ $FBSD -eq 1]; then
+    elif [ $FBSD -eq 1 ]; then
         ICMD="sudo pkg install ${PKG}"
     fi
 
@@ -39,15 +39,17 @@ install_dev_utils () {
 
 check_os () {
      if [ -f /etc/debian_version ]; then
+         echo "debian detected"
         DEBIAN=1
     elif [ -f /etc/freebsd-update.conf ]; then
+        echo "FreeBSD detected"
         FBSD=1
     fi  
 }
 
 
 remove_template_examples () {
-    echo "does nothing right now"
+    echo ""
 }
 
 
@@ -59,10 +61,12 @@ install_needed_dependencies () {
     echo "Installing dependencies..."
     install_pkg "cmake"
     install_pkg "git"
-    install_pkg "clang"
+    #install_pkg "clang"
     install_pkg "${PY_VER}"
 
     # Install python modules/libraries.
+    echo "Upgrading python pip module..."
+    $PY_VER -m pip -m pip install --upgrade pip
     echo "Installing Python Modules..."
     $PY_VER -m pip install pytest
     $PY_VER -m pip install opencv-python   
