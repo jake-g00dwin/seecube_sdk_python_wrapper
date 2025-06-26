@@ -8,9 +8,9 @@ Download the latest release from: [releases](https://github.com/jake-g00dwin/see
 If you want you can also download the repository inside your terminal using
 the following commands.
 ```sh
-# Downloads the v0.0.5 zip to local directory
+# Downloads the vX.X.X zip to local directory
 # Replace with newest release URL.
-wget https://github.com/jake-g00dwin/seecube_sdk_python_wrapper/archive/refs/tags/v0.0.5.zip
+wget https://github.com/jake-g00dwin/seecube_sdk_python_wrapper/archive/refs/tags/vX.X.X.zip
 ```
 
 Next you will need to extract the repository, you can do this using either your
@@ -20,10 +20,10 @@ If you are already in your terminal the following command will work if you have
 the `unzip` utility installed.
 
 ```sh
-unzip ./v0.0.5.zip
+unzip ./X.X.X.zip
 
 # Example output
-Archive: ./v0.0.5.zip
+Archive: ./X.X.X.zip
 ....
     creating: ...
     inflating: ...
@@ -44,7 +44,7 @@ script as shown below.
 
 ```sh
 # Chainging directory into the project directory.
-cd ./seecube_sdk_python_wrapper-0.0.5
+cd ./seecube_sdk_python_wrapper-X.X.X
 
 # Setting the execute permissions on the shell script.
 sudo chmod +x ./setup.sh
@@ -99,11 +99,8 @@ and should be availble as a `.so` file.
 In order to run the example program you will want to place or execute your script
 from the same directory as both the py_seecube file and the SeeCubed file(s).
 
-You can copy all three files to their own directory or you can create
-symlinks if you're going to be updating the SDK often or rebuilding it.
-
-
-**Seperate Option:**
+You can copy all three files to their own directory usign the `cp` or copy
+command.
 
 ```sh
 # Creates new directory in the downloads folder.
@@ -121,9 +118,9 @@ cp ./src/example.py ~/Downloads/py_seecube_project/
 
 ```
 
-**Symlinks Option:**
+**Running the Example:**
 
 ```sh
-
-
+python3.10 ./example.py
 ```
+
