@@ -7,7 +7,7 @@ PKG_MNGR=""
 DEBIAN=0
 FBSD=0
 SYSINSTALL=0
-DEV_UTILS="vim tmux fzf"
+DEV_UTILS="vim tmux fzf git"
 PY_VER="python3.10"
 
 install_pkg () {
@@ -85,7 +85,7 @@ build_cpputest () {
     cd ./cpputest/build
     cmake ../
     
-    if [ SYSINSTALL -eq 1]; then
+    if [ SYSINSTALL -eq 1 ]; then
         make install
     else
         make
