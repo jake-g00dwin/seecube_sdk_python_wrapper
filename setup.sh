@@ -77,7 +77,7 @@ create_project_symlinks () {
 
 
 build_cpputest () {
-    git submodule add https://github.com/cpputest/cpputest.git
+    git submodule add https://github.com/cpputest/cpputest.git /extern/cpputest
     git sumodule status
     cd ./cpputest/build
     cmake ../
@@ -101,7 +101,8 @@ setup() {
     echo "Setting up env"
     check_os
     #install_dev_utils
-    install_needed_dependencies 
+    install_needed_dependencies
+    git submodule update --init --recursive
 }
 
 setup
