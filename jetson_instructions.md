@@ -91,5 +91,39 @@ echo "2" | ./otto.sh
 ./otto.sh
 ```
 
+This will have built the python bindings module into the `build/src/` directory
+and should be availble as a `.so` file.
 
 ## Using the python module
+
+In order to run the example program you will want to place or execute your script
+from the same directory as both the py_seecube file and the SeeCubed file(s).
+
+You can copy all three files to their own directory or you can create
+symlinks if you're going to be updating the SDK often or rebuilding it.
+
+
+**Seperate Option:**
+
+```sh
+# Creates new directory in the downloads folder.
+mkdir ~/Downloads/py_seecube_project
+
+# Copy your version of the lib into the project dir.
+# The `<>` indicates that section varies based on your system.
+cp ./build/src/py_seecube.cpython-<PY_VER>-<CPU_ARCH>-linux-gnu.so ~/Downloads/py_seecube_project/
+
+# Copy the original SeeCube Library files.
+cp ./src/linux_arm/<SERIAL_NUMS>/libSeeCube.so ~/Downloads/py_seecube_project/
+
+# Copy the example script.
+cp ./src/example.py ~/Downloads/py_seecube_project/
+
+```
+
+**Symlinks Option:**
+
+```sh
+
+
+```
