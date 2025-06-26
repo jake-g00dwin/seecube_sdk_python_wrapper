@@ -13,7 +13,7 @@ PY_VER="python3.10"
 install_pkg () {
     PKG=$1
     ICMD=""
-    if[ $DEBIAN -eq 1]; then
+    if [ $DEBIAN -eq 1]; then
         ICMD="sudo apt install ${PKG}"
     elif [ $FBSD -eq 1]; then
         ICMD="sudo pkg install ${PKG}"
