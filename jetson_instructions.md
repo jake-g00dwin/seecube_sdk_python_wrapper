@@ -53,9 +53,43 @@ sudo chmod +x ./setup.sh
 ./setup.sh
 ```
 
+**Example output:**
+```sh
+Setting up env
+debian detected
+checking the OS...
+debian detected
+Installing dependencies...
+[sudo] password for user: 
+```
 
 ## Configuring for your hardware
 
+In order to build for the correct hardware you need to know what camera you are
+building for.
+
+The current default linked library(SeeCube SDK) supports three differnt camera
+serial numbers.
+
+You may change the version targeted by editing the cmake configuration file
+at `src/CMakeLists.txt` and comment/uncomment by placing or removing the `#`
+symbol at the begining of a line.
+
 ## Building the python module
+
+To build the module the process is automated. You can use the shell script in 
+the projects directory to build the project.
+
+Use the commands below to follow a standard build.
+
+```sh
+# This pipes the menu selection into it automatically if you don't need the menu.
+echo "2" | ./otto.sh
+
+
+# Use this version if you would like to see the menu.
+./otto.sh
+```
+
 
 ## Using the python module
