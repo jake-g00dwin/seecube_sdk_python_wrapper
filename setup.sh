@@ -38,6 +38,7 @@ install_dev_utils () {
 
 
 check_os () {
+    echo "checking the OS..."
      if [ -f /etc/debian_version ]; then
          echo "debian detected"
         DEBIAN=1
@@ -54,10 +55,6 @@ remove_template_examples () {
 
 
 install_needed_dependencies () {
-    # Check the OS
-    echo "checking the OS..."
-    check_os
-
     echo "Installing dependencies..."
     install_pkg "cmake"
     install_pkg "git"
