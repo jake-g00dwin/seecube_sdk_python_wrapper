@@ -1,5 +1,13 @@
 # Jetson py_seecube
 
+## USB rules
+
+If you haven't already you will want to make sure that you have accesss to the
+actual usb device.
+
+This will already be setup if you have used the original SeeCube SDK script
+to install them `install_udev_rule.sh`
+
 
 ## Downloading the software from a release
 
