@@ -64,7 +64,6 @@ sudo chmod +x ./setup.sh
 **Example output:**
 ```sh
 Setting up env
-debian detected
 checking the OS...
 debian detected
 Installing dependencies...
@@ -121,7 +120,7 @@ and should be available as a `.so` file.
 In order to run the example program you will want to place or execute your script
 from the same directory as both the py_seecube file and the SeeCubed file(s).
 
-You can copy all three files to their own directory using the `cp` or copy
+You can copy both files to their own directory using the `cp` or copy
 command.
 
 If you have a `data` folder containing camera information from the platform
@@ -134,9 +133,6 @@ mkdir ~/Downloads/py_seecube_project
 # Copy your version of the lib into the project dir.
 # The `<>` indicates that section varies based on your system.
 cp ./build/src/py_seecube.cpython-<PY_VER>-<CPU_ARCH>-linux-gnu.so ~/Downloads/py_seecube_project/
-
-# Copy the original SeeCube Library files.
-cp ./src/linux_arm/<SERIAL_NUMS>/libSeeCube.so ~/Downloads/py_seecube_project/
 
 # Copy the example script.
 cp ./src/example.py ~/Downloads/py_seecube_project/
