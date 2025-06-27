@@ -14,7 +14,7 @@ wget https://github.com/jake-g00dwin/seecube_sdk_python_wrapper/archive/refs/tag
 ```
 
 Next you will need to extract the repository, you can do this using either your
-prefered archiving tool such as Arc, 7zip or your operating systems default.
+preferred archiving tool such as Arc, 7zip or your operating systems default.
 
 If you are already in your terminal the following command will work if you have
 the `unzip` utility installed.
@@ -36,14 +36,14 @@ Archive: ./X.X.X.zip
 The setup for the build tools needed is automated through the use of a shell
 script inside the project's directory.
 
-To run the `setup.sh` file you will need to first ensure it has premissions
+To run the `setup.sh` file you will need to first ensure it has permissions
 to run by setting the execute bit.
 
 After the execute bit/permissions are set you can proceed with running the 
 script as shown below.
 
 ```sh
-# Chainging directory into the project directory.
+# Changing directory into the project directory.
 cd ./seecube_sdk_python_wrapper-X.X.X
 
 # Setting the execute permissions on the shell script.
@@ -63,17 +63,31 @@ Installing dependencies...
 [sudo] password for user: 
 ```
 
+**libusb:**
+
+If your system seems to have trouble in the building step you can check to
+make sure that `pkg-config` can find the correct usb library with the following
+terminal commands.
+
+The name of the package itself needed can change depending on the operating 
+system, and it's package managers.
+
+```sh
+pkg-config --cflags --libs libusb-1.0
+```
+
+
 ## Configuring for your hardware
 
 In order to build for the correct hardware you need to know what camera you are
 building for.
 
-The current default linked library(SeeCube SDK) supports three differnt camera
+The current default linked library(SeeCube SDK) supports three different camera
 serial numbers.
 
 You may change the version targeted by editing the cmake configuration file
 at `src/CMakeLists.txt` and comment/uncomment by placing or removing the `#`
-symbol at the begining of a line.
+symbol at the beginning of a line.
 
 ## Building the python module
 
@@ -92,14 +106,14 @@ echo "2" | ./otto.sh
 ```
 
 This will have built the python bindings module into the `build/src/` directory
-and should be availble as a `.so` file.
+and should be available as a `.so` file.
 
 ## Using the python module
 
 In order to run the example program you will want to place or execute your script
 from the same directory as both the py_seecube file and the SeeCubed file(s).
 
-You can copy all three files to their own directory usign the `cp` or copy
+You can copy all three files to their own directory using the `cp` or copy
 command.
 
 ```sh
