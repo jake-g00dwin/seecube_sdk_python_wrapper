@@ -34,7 +34,8 @@ if(UNIT_TESTING)
         fake_SeeCube    
     )
 
-elseif(CMAKE_HOST_SYSTEM STREQUAL "Linux")
+elseif(CMAKE_HOST_SYSTEM MATCHES "Linux")
+    message("Setting up libraries for linux.")
     find_package(PkgConfig REQUIRED)
 
     pkg_check_modules(LIBUSB REQUIRED libusb-1.0)
@@ -58,7 +59,7 @@ elseif(CMAKE_HOST_SYSTEM STREQUAL "Linux")
         message("ERROR: Unknown platform!")
     endif()
 
-elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows" )
+elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" )
     set(MY_SHARED_LIB "${CMAKE_SOURCE_DIR}/src/windows/${SDK_SERIAL}/SeeCubed.lib")
     target_link_libraries(${PROJECT_NAME} PRIVATE ${MY_SHARED_LIB})
 endif()
