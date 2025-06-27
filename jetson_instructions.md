@@ -124,6 +124,9 @@ from the same directory as both the py_seecube file and the SeeCubed file(s).
 You can copy all three files to their own directory using the `cp` or copy
 command.
 
+If you have a `data` folder containing camera information from the platform
+you can copy this into your project directory as well.
+
 ```sh
 # Creates new directory in the downloads folder.
 mkdir ~/Downloads/py_seecube_project
