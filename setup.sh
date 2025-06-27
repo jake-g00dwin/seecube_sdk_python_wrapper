@@ -58,6 +58,7 @@ install_needed_dependencies () {
     echo "Installing dependencies..."
     install_pkg "cmake"
     install_pkg "git"
+    install_pkg "libusb-dev"
     #install_pkg "clang"
     install_pkg "${PY_VER}"
 
